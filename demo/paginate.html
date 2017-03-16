@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Paginate</title>
+	<style>
+		label { background: #EEE; padding: 4px; }
+		body > div { margin: 8px; }
+		.f-paginate .page-wrapper {
+			display: inline-block;
+			padding: 1px;
+			border: 1px solid #DDD;
+			border-radius: 4px;
+		}
+		.f-paginate .page-wrapper button {
+			min-width: 36px;
+			height: 28px;
+			border: none;
+			outline: none;
+			background: #EEE;
+		}
+		.f-paginate .page-wrapper button:first-child {
+			border-radius: 4px 0 0 4px;
+		}
+		.f-paginate .page-wrapper button:last-child {
+			border-radius: 0 4px 4px 0;
+		}
+		.f-paginate .page-wrapper .current-page {
+			background: #D2D2D2;
+		}
+		.f-paginate .page-wrapper .previous-page {
+			background: #DDD;
+		}
+	</style>
+</head>
+
+<body ng-controller="MyController">
+
+	<div f-paginate="{page:1,totalPage:10,onPick:pick}"></div>
+	<div f-paginate page="1" total-page="10" on-pick="pick($page)"></div>
+	<hr>
+	<div ng-init="temp={page:1,totalPage:10,size:100}" f-paginate="temp" on-pick="temp.page=$page">
+		<span> {{temp.page}} / {{temp.totalPage}} </span>
+		<span> 共{{temp.size}}条记录 </span>
+		<p>Something else will be ignored</p>
+	</div>
+	<hr>
+	<p>
+		<label>page: <input type="number" ng-model="pageOption.page" style="width:60px"></label>
+		<label>totalPage: <input type="number" ng-model="pageOption.totalPage" style="width:60px"></label>
+		<label>range: <input type="number" ng-model="pageOption.range" style="width:60px"></label>
+		<label><input type="checkbox" ng-model="pageOption.zeroStart">zeroStart</label>
+		<label><input type="checkbox" ng-model="pageOption.constant">constant</label>
+		<label>ellipsis<input type="checkbox" ng-model="pageOption.ellipsis"><input ng-model="pageOption.ellipsis" style="width:60px"></label>
+		<label><input type="checkbox" ng-model="pageOption.endsPage">endsPage</label>
+		<label>prevPage<input type="checkbox" ng-model="pageOption.prevPage"><input ng-model="pageOption.prevPage" style="width:60px"></label>
+		<label>nextPage<input type="checkbox" ng-model="pageOption.nextPage"><input ng-model="pageOption.nextPage" style="width:60px"></label>
+		<label>firstPage<input type="checkbox" ng-model="pageOption.firstPage"><input ng-model="pageOption.firstPage" style="width:60px"></label>
+		<label>lastPage<input type="checkbox" ng-model="pageOption.lastPage"><input ng-model="pageOption.lastPage" style="width:60px"></label>
+	</p>
+	<div f-paginate="pageOption" on-pick="list($page)"></div>
+	<hr>
+	<div ng-repeat="instance in instances" f-paginate="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></div>
+
+	<script src="http://libs.cdnjs.net/jquery/3.1.1/jquery.min.js"></script>
+	<script src="http://libs.cdnjs.net/angular.js/1.5.8/angular.min.js"></script>
+	<script src="../src/fui.module.js"></script>
+	<script src="../src/fui.paginate.component.js"></script>
+	<script>
+		angular.module('app', ['fui']).controller('MyController', function($scope) {
+			$scope.pick = function(page) {
+				alert('page ' + page + ' is picked');
+			};
+			$scope.pageOption = {
+				page: 1,
+				totalPage: 20,
+				range: 1,
+				constant: true,
+				ellipsis: true,
+				endsPage: true,
+				prevPage: null,
+				nextPage: null,
+				firstPage: null,
+				lastPage: null
+			};
+			$scope.list = function(page) {
+				// do ajax and then update the current page
+				$scope.pageOption.page = page;
+			};
+			/* 示例 */
+			$scope.instancePage = 1;
+			$scope.instanceTotalPage = 20;
+			$scope.instances = [{
+				// default
+			}, {
+				constant: false
+			}, {
+				range: -1,
+				prevPage: true,
+				nextPage: true,
+				firstPage: true,
+				lastPage: true
+			}, {
+				range: -1,
+				prevPage: true,
+				nextPage: true,
+				ellipsis: false,
+				endsPage: false
+			}, {
+				range: 0,
+				prevPage: true,
+				nextPage: true,
+				ellipsis: false,
+				endsPage: false
+			}, {
+				range: 1,
+				firstPage: true,
+				lastPage: true,
+				ellipsis: false,
+				endsPage: false
+			}, {
+				range: 2,
+				firstPage: true,
+				lastPage: true,
+				ellipsis: false,
+				endsPage: false
+			}, {
+				range: 1,
+				endsPage: false,
+				prevPage: true,
+				nextPage: true,
+				firstPage: true,
+				lastPage: true
+			}];
+		});
+	</script>
+</body>
+
+</html>
