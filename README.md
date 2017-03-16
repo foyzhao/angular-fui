@@ -1,2 +1,2 @@
 # fui
-a suit of user interface based on angularJS
+A suit of user interface based on angularJS
