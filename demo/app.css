@@ -1,0 +1,64 @@
+/* bar style */
+.f-paginate .page-wrapper {
+	display: inline-block;
+	padding: 1px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+}
+.f-paginate .page-wrapper button {
+	min-width: 36px;
+	height: 28px;
+	border: none;
+	outline: none;
+	background: #EEE;
+}
+.f-paginate .page-wrapper button:first-child {
+	border-radius: 4px 0 0 4px;
+}
+.f-paginate .page-wrapper button:last-child {
+	border-radius: 0 4px 4px 0;
+}
+.f-paginate .page-wrapper .current-page {
+	background: #D2D2D2;
+}
+.f-paginate .page-wrapper .previous-page {
+	background: #DDD;
+}
+
+/* list style
+.f-paginate .page-wrapper button {
+	min-width: 36px;
+	height: 28px;
+	border: none;
+	outline: none;
+	background: #EEE;
+	margin: 0 2px;
+	border-radius: 4px;
+}
+.f-paginate .page-wrapper .current-page {
+	background: #D2D2D2;
+}
+.f-paginate .page-wrapper .ellipsis {
+	background: none;
+}
+*/
+/* bar divide style
+.f-paginate .page-wrapper button {
+	min-width: 36px;
+	height: 28px;
+	outline: none;
+	border: 1px solid #BBB;
+	border-right: none;
+	background: #EEE;
+}
+.f-paginate .page-wrapper button:first-child {
+	border-radius: 2px 0 0 2px;
+}
+.f-paginate .page-wrapper button:last-child {
+	border-radius: 0 2px 2px 0;
+	border-right: 1px solid #BBB;
+}
+.f-paginate .page-wrapper .current-page {
+	background: #DDD;
+}
+*/

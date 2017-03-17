@@ -1,1 +1,0 @@
-angular.module('fui', []).value('fuiOption', {});
