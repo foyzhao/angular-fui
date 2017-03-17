@@ -1,2 +1,2 @@
-# fui
-A suit of user interface based on angularJS
+# Paginate for angularJS
+A paginate component for angularJS.
