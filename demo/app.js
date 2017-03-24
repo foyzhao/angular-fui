@@ -13,9 +13,6 @@ angular.module('demo', ['fui']).value('fuiOption', {
 		currentPageEnable: true // boolean
 	}
 }).controller('DemoController', function($scope) {
-	$scope.pick = function(page) {
-		alert('page ' + page + ' is picked');
-	};
 	// local settings at here
 	$scope.pageOption = {
 		zeroStart: false,
