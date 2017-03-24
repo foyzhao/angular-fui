@@ -7,36 +7,40 @@
 	<link rel="stylesheet" href="./app.css">
 	<style>
 		div, p { margin: 8px; }
+		label { display: inline-block; margin: 2px 0; padding: 4px; background: #EEE; }
 	</style>
 </head>
 
 <body ng-controller="DemoController">
 
-	<div f-paginate="{page:1,totalPage:10,onPick:pick}"></div>
-	<div f-paginate page="1" total-page="10" on-pick="pick($page)"></div>
+	<p>
+		<label><input type="checkbox" ng-model="pageOption.zeroStart">zeroStart</label>
+		<br>
+		<label>page: <input type="number" ng-model="pageOption.page" style="width:40px"></label>
+		<label>totalPage: <input type="number" ng-model="pageOption.totalPage" style="width:40px"></label>
+		<br>
+		<label>range: <input type="number" ng-model="pageOption.range" style="width:40px"></label>
+		<label>ends: <input type="number" ng-model="pageOption.ends" style="width:40px"></label>
+		<label><input type="checkbox" ng-model="pageOption.adjustLength">adjustLength</label>
+		<br>
+		<label>ellipsis<input type="checkbox" ng-model="pageOption.ellipsis"><input ng-model="pageOption.ellipsis" style="width:40px"></label>
+		<br>
+		<label>prevPage<input type="checkbox" ng-model="pageOption.prevPage"><input ng-model="pageOption.prevPage" style="width:40px"></label>
+		<label>nextPage<input type="checkbox" ng-model="pageOption.nextPage"><input ng-model="pageOption.nextPage" style="width:40px"></label>
+		<label>firstPage<input type="checkbox" ng-model="pageOption.firstPage"><input ng-model="pageOption.firstPage" style="width:40px"></label>
+		<label>lastPage<input type="checkbox" ng-model="pageOption.lastPage"><input ng-model="pageOption.lastPage" style="width:40px"></label>
+		<br>
+		<label><input type="checkbox" ng-model="pageOption.currentPageEnable">currentPageEnable</label>
+	</p>
+	<div f-paginate="pageOption" on-pick="list($page)"></div>
+	<hr>
+	<div ng-repeat="instance in instances" f-paginate="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></div>
 	<hr>
 	<div ng-init="temp={page:1,totalPage:10,size:100}" f-paginate="temp" on-pick="temp.page=$page">
 		<span> {{temp.page}} / {{temp.totalPage}} </span>
 		<span> {{temp.size}} elements </span>
 		<p>Something else will be ignored</p>
 	</div>
-	<hr>
-	<p>
-		<label>page: <input type="number" ng-model="pageOption.page" style="width:60px"></label>
-		<label>totalPage: <input type="number" ng-model="pageOption.totalPage" style="width:60px"></label>
-		<label>range: <input type="number" ng-model="pageOption.range" style="width:60px"></label>
-		<label><input type="checkbox" ng-model="pageOption.zeroStart">zeroStart</label>
-		<label><input type="checkbox" ng-model="pageOption.constant">constant</label>
-		<label>ellipsis<input type="checkbox" ng-model="pageOption.ellipsis"><input ng-model="pageOption.ellipsis" style="width:60px"></label>
-		<label><input type="checkbox" ng-model="pageOption.endsPage">endsPage</label>
-		<label>prevPage<input type="checkbox" ng-model="pageOption.prevPage"><input ng-model="pageOption.prevPage" style="width:60px"></label>
-		<label>nextPage<input type="checkbox" ng-model="pageOption.nextPage"><input ng-model="pageOption.nextPage" style="width:60px"></label>
-		<label>firstPage<input type="checkbox" ng-model="pageOption.firstPage"><input ng-model="pageOption.firstPage" style="width:60px"></label>
-		<label>lastPage<input type="checkbox" ng-model="pageOption.lastPage"><input ng-model="pageOption.lastPage" style="width:60px"></label>
-	</p>
-	<div f-paginate="pageOption" on-pick="list($page)"></div>
-	<hr>
-	<div ng-repeat="instance in instances" f-paginate="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></div>
 
 	<script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
 	<script src="https://code.angularjs.org/1.6.0/angular.min.js"></script>

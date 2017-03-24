@@ -4,14 +4,14 @@ angular.module('fui', [])
 		var defaultOption = angular.extend({
 			zeroStart: true,
 			range: 5,
-			constant: true,
+			ends: 1,
 			ellipsis: true,
-			endsPage: true,
 			prevPage: null,
 			nextPage: null,
 			firstPage: null,
 			lastPage: null,
-			disableCurrentPage: false
+			adjustLength: true,
+			currentPageEnable: true
 		}, fuiOption.paginate);
 		// @formatter:off
 		var tmpl =
@@ -68,70 +68,81 @@ angular.module('fui', [])
 
 				function verify() {
 					if (!angular.isNumber(option.page) || !angular.isNumber(option.totalPage)) {
-						throw Error('fui.paginate: page and totalPage should be integer');
+						throw Error('f-paginate: "page" and "totalPage" should be integer');
 					}
 					if (option.page < 0 || option.page >= option.totalPage) {
-						throw Error('fui.paginate: invalid value of page or totalPage');
+						throw Error('f-paginate: invalid value of "page" or "totalPage"');
 					}
 					if (!angular.isNumber(option.range)) {
-						throw Error('fui.paginate: range should be integer');
+						throw Error('f-paginate: "range" should be integer');
+					}
+					if (!angular.isNumber(option.ends) || option.ends < 0) {
+						throw Error('f-paginate: "ends" should be positive integer or 0');
 					}
 					process(option.page);
 				}
 
-				function process(focusPage) {
+				function process(targetPage) {
+
+					// clear pages
 					scope.items = [];
 
 					if (option.range >= 0) {
-						for (var i = 1; focusPage - i >= 0 && (i <= option.range || (option.constant && option.totalPage - focusPage + i - 1 - (option.ellipsis ? 1 : 0) - (option.endsPage ? 1 : 0) <= option.range * 2)); i++) {
-							scope.items.unshift(createItem(focusPage - i));
+
+						// target page
+						scope.items.push(createItem(targetPage));
+
+						// pages before target page
+						for (var i = 1; targetPage - i >= 0 && (i <= option.range || (option.adjustLength && option.totalPage - targetPage + i - 1 - (option.ellipsis ? 1 : 0) - option.ends <= option.range * 2)); i++) {
+							scope.items.unshift(createItem(targetPage - i));
 						}
 
-						scope.items.push(createItem(focusPage));
-
-						for (var j = 1; focusPage + j < option.totalPage && (j <= option.range || (option.constant && focusPage + j - (option.ellipsis ? 1 : 0) - (option.endsPage ? 1 : 0) <= option.range * 2)); j++) {
-							scope.items.push(createItem(focusPage + j));
+						// pages after target page
+						for (var j = 1; targetPage + j < option.totalPage && (j <= option.range || (option.adjustLength && targetPage + j - (option.ellipsis ? 1 : 0) - option.ends <= option.range * 2)); j++) {
+							scope.items.push(createItem(targetPage + j));
 						}
 
 						if (option.ellipsis) {
-							var beginPage = scope.items[0].page;
-							if (beginPage > 0) {
-								if (beginPage == 1 || beginPage == 2 && option.endsPage) {
-									scope.items.unshift(createItem(beginPage - 1));
-								} else {
-									scope.items.unshift({
-										page: Math.floor(beginPage / 2),
-										text: angular.isString(option.ellipsis) ? option.ellipsis : '…',
-										type: {
-											'ellipsis': true,
-											'previous-page': Math.floor(beginPage / 2) < option.page
-										}
-									});
-								}
+							// left ellipsis
+							var firstPage = scope.items[0].page;
+							if (firstPage - option.ends == 1) {
+								scope.items.unshift(createItem(firstPage - 1));
+							} else if (firstPage - option.ends > 1) {
+								var beginEllipsisPage = Math.round((firstPage - option.ends + 1) / 2) + option.ends - 1;
+								scope.items.unshift({
+									page: beginEllipsisPage,
+									text: angular.isString(option.ellipsis) ? option.ellipsis : '…',
+									type: {
+										'ellipsis': true,
+										'previous-page': beginEllipsisPage < option.page
+									}
+								});
 							}
-							var endPage = scope.items[scope.items.length - 1].page;
-							if (endPage < option.totalPage - 1) {
-								if (endPage == option.totalPage - 2 || endPage == option.totalPage - 3 && option.endsPage) {
-									scope.items.push(createItem(endPage + 1));
-								} else {
-									scope.items.push({
-										page: Math.round((endPage + option.totalPage - 1) / 2),
-										text: angular.isString(option.ellipsis) ? option.ellipsis : '…',
-										type: {
-											'ellipsis': true,
-											'previous-page': Math.round((endPage + option.totalPage - 1) / 2) < option.page
-										}
-									});
-								}
+							// right ellipsis
+							var lastPage = scope.items[scope.items.length - 1].page;
+							if (option.totalPage - lastPage - option.ends == 2) {
+								scope.items.push(createItem(lastPage + 1));
+							} else if (option.totalPage - lastPage - option.ends > 2) {
+								var endEllipsisPage = Math.floor((lastPage + option.totalPage - option.ends + 2) / 2) - 1;
+								scope.items.push({
+									page: endEllipsisPage,
+									text: angular.isString(option.ellipsis) ? option.ellipsis : '…',
+									type: {
+										'ellipsis': true,
+										'previous-page': endEllipsisPage < option.page
+									}
+								});
 							}
 						}
 
-						if (option.endsPage) {
-							if (scope.items[0].page > 0) {
-								scope.items.unshift(createItem(0));
+						if (option.ends > 0) {
+							// left end pages
+							for (var x = Math.min(scope.items[0].page - 1, option.ends - 1); x >= 0; x--) {
+								scope.items.unshift(createItem(x));
 							}
-							if (scope.items[scope.items.length - 1].page < option.totalPage - 1) {
-								scope.items.push(createItem(option.totalPage - 1));
+							// right end pages
+							for (var y = Math.max(scope.items[scope.items.length - 1].page + 1, option.totalPage - option.ends); y < option.totalPage; y++) {
+								scope.items.push(createItem(y));
 							}
 						}
 					}
@@ -147,6 +158,7 @@ angular.module('fui', [])
 							}
 						});
 					}
+
 					if (option.nextPage) {
 						scope.items.push({
 							page: option.page + 1,
@@ -170,6 +182,7 @@ angular.module('fui', [])
 							}
 						});
 					}
+
 					if (option.lastPage) {
 						scope.items.push({
 							page: option.totalPage - 1,
@@ -187,7 +200,7 @@ angular.module('fui', [])
 					return {
 						page: page,
 						text: page + 1,
-						disabled: option.disableCurrentPage && page == option.page,
+						disabled: !option.currentPageEnable && page == option.page,
 						type: {
 							'current-page': page == option.page,
 							'previous-page': page < option.page
