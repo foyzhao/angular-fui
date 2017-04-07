@@ -33,9 +33,9 @@ The ellipsis can be clicked to quickly cruise the page number.
 
 	The number of pages displayed at both ends.
 
-* **ellipsis** (boolean) (default:true)
+* **ellipsis** (boolean|string) (default:true)
 
-	Whether to display ellipsis at both sides of the current page. The ellipsis can be clicked to quickly cruise the page number.
+	Whether to display ellipsis at both sides of the current page. The ellipsis can be clicked to quickly cruise the page number. A string is used to define the ellipsis button text.
 
 * **prevPage** (string|boolean) (default:null)
 
