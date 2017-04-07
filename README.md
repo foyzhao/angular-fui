@@ -27,8 +27,7 @@ The ellipsis can be clicked to quickly cruise the page number.
 
 * **range** (number) (default:5)
 
-	The number of pages on both sides of the current page.
-	Setting a negative number prevents the drawing of pages.
+	The number of pages on both sides of the current page. Setting a negative number prevents the drawing of pages.
 
 * **ends** (number) (default:1)
 
@@ -36,7 +35,7 @@ The ellipsis can be clicked to quickly cruise the page number.
 
 * **ellipsis** (boolean) (default:true)
 
-	If ellipsis displayed at both sides of the current page.
+	Whether to display ellipsis at both sides of the current page. The ellipsis can be clicked to quickly cruise the page number.
 
 * **prevPage** (string|boolean) (default:null)
 
@@ -56,7 +55,7 @@ The ellipsis can be clicked to quickly cruise the page number.
 
 * **adjustLength** (boolean) (default:true)
 
-	Automatically adjust the range to keep the total number of buttons unchanged.
+	Automatically adjust the range option to keep the component length unchanged.
 
 * **currentPageEnable** (boolean) (default:true)
 
