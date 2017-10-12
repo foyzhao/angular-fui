@@ -1,18 +1,20 @@
-# Paginate component for angularJS
+# Angular FUI
 
-## Feature
+## Pagination
+
+### Feature
 The ellipsis can be clicked to quickly cruise the page number.
 
-## Usage
-`<div f-paginate page="1" total-page="10" on-pick="callbackFunction($page)"></div>`
+### Usage
+`<pagination page="1" total-page="10" on-pick="callbackFunction($page)"></div>`
 
-`<div f-paginate="{page:1,totalPage:10,onPick:callbackFunction}"></div>`
+`<pagination option="{page:1,totalPage:10,onPick:callbackFunction}"></div>`
 
-`<div f-paginate="pageOptionDefinedInScope"></div>`
+`<pagination option="pageOptionDefinedInScope"></div>`
 
-[Demo](http://htmlpreview.github.io/?https://raw.githubusercontent.com/foyzhao/angular-paginate/master/demo/index.html)
+[Demo](http://htmlpreview.github.io/?https://raw.githubusercontent.com/foyzhao/angular-paginate/master/demo/pagination.html)
 
-## Options
+### Options
 * **page** (number)
 
 	The current page.
