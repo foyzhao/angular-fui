@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>FUI - Layer</title>
+	<link rel="stylesheet" href="../dist/angular.fui.css">
+	<style>
+		body > header { position: fixed; z-index: 2000; background: #FFF; padding: 4px; margin: 4px; }
+	</style>
+</head>
+
+<body ng-controller="Ctrl as ctrl">
+
+	<header>
+		<button ng-click="layer1.$open()">打开层1</button>
+		<button ng-click="layer1.$close()">关闭层1</button>
+		<button ng-click="layer2.$open()">打开层2</button>
+		<button ng-click="layer2.$close()">关闭层2</button>
+		<button ng-click="ctrl.confirm()">打开确认框</button>
+	</header>
+
+	<p style="height:2000px"></p>
+
+	<layer name="layer1">
+		<div class="dialog" style="width:600px;height:400px">
+			<header>层1弹窗标题</header>
+			<div class="content">
+				<p>定义了宽度600px，高度400px，所在SCOPE的ID为:{{$id}}</p>
+				<layer name="layer11">
+					<div class="dialog">
+						<header>弹窗1子弹窗标题</header>
+						<div class="content">
+							<p>没有定义宽高，大小适应内容，所在SCOPE的ID为:{{$id}}</p>
+						</div>
+						<footer>
+							<button ng-click="layer11.$close()">关闭</button>
+						</footer>
+					</div>
+				</layer>
+			</div>
+			<footer>
+				<button class="primary" ng-click="layer11.$open()">打开子弹窗</button>
+				<button ng-click="layer1.$close()">关闭</button>
+			</footer>
+		</div>
+	</layer>
+
+	<layer name="layer2">
+		<p style="background:#FFF;padding:4px;">
+			自定义弹出层2的内容
+			<a ng-click="layer2.$close()">关闭</a>
+		</p>
+	</layer>
+
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/angular.js"></script>
+	<script src="../lib/angular-animate.js"></script>
+	<script src="../dist/angular.fui.js"></script>
+	<script>
+		angular.module('demoApp', ['ngAnimate', 'fui']).controller('Ctrl', function(dialog) {
+			this.confirm = function() {
+				dialog
+					.confirm('这是一个确认弹窗，是否弹出警示框?')
+					.then(function() {
+						dialog.alert('这是一个警示框');
+					});
+			};
+		});
+	</script>
+
+</body>
+
+</html>

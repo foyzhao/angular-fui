@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html ng-app="demo">
+
+<head>
+	<meta charset="UTF-8">
+	<title>FUI - Paginate</title>
+	<link rel="stylesheet" href="../dist/angular.fui.css">
+	<style>
+		p { margin: 20px; }
+		input { width: 80px; }
+		pagination { margin: 12px; }
+	</style>
+</head>
+
+<body ng-controller="DemoController">
+
+	<p>
+		<checkbox ng-model="pageOption.zeroStart">首页从0开始</checkbox>
+		<checkbox ng-model="pageOption.adjustLength">控制总长度不变</checkbox>
+		<checkbox ng-model="pageOption.currentPageEnable">当前页是否可用</checkbox>
+	</p>
+	<p>
+		当前页: <input type="number" ng-model="pageOption.page">
+		总页数: <input type="number" ng-model="pageOption.totalPage">
+		当前页两边显示数量: <input type="number" ng-model="pageOption.range">
+		两端显示数量: <input type="number" ng-model="pageOption.ends">
+	</p>
+	<p>
+		<checkbox ng-model="pageOption.ellipsis">省略号：</checkbox><input ng-model="pageOption.ellipsis">
+		<checkbox ng-model="pageOption.prevPage">上一页：</checkbox><input ng-model="pageOption.prevPage">
+		<checkbox ng-model="pageOption.nextPage">下一页：</checkbox><input ng-model="pageOption.nextPage">
+		<checkbox ng-model="pageOption.firstPage">首页：</checkbox><input ng-model="pageOption.firstPage">
+		<checkbox ng-model="pageOption.lastPage">尾页：</checkbox><input ng-model="pageOption.lastPage">
+	</p>
+	<pagination option="pageOption" on-pick="list($page)"></pagination>
+	<hr>
+	<pagination ng-repeat="instance in instances" option="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></pagination>
+	<hr>
+	<pagination ng-init="temp={page:1,totalPage:10,size:100}" option="temp" on-pick="temp.page=$page">
+		<span> {{temp.page}} / {{temp.totalPage}} </span>
+		<span> {{temp.size}} elements </span>
+		<p>Something else will be ignored</p>
+	</pagination>
+
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/angular.js"></script>
+	<script src="../lib/angular-animate.js"></script>
+	<script src="../dist/angular.fui.js"></script>
+	<script>
+		angular.module('demo', ['fui']).value('fuiOption', {
+			paginate: {
+				// global settings at here
+				zeroStart: false, // boolean
+				range: 5, // integer
+				ends: 1, // integer
+				ellipsis: true, // boolean | string
+				prevPage: null, // boolean | string
+				nextPage: null, // boolean | string
+				firstPage: null, // boolean | string
+				lastPage: null, // boolean | string
+				adjustLength: true, // boolean
+				currentPageEnable: true // boolean
+
+			}
+		}).controller('DemoController', function($scope) {
+			// local settings at here
+			$scope.pageOption = {
+				zeroStart: false,
+				page: 1,
+				totalPage: 24,
+				range: 2,
+				ends: 2,
+				ellipsis: true,
+				prevPage: null,
+				nextPage: null,
+				firstPage: null,
+				lastPage: null,
+				adjustLength: true,
+				currentPageEnable: true
+			};
+			$scope.list = function(page) {
+				// do ajax and then update the current page
+				$scope.pageOption.page = page;
+			};
+			/* 示例 */
+			$scope.instancePage = 1;
+			$scope.instanceTotalPage = 20;
+			$scope.instances = [{
+				// default
+			}, {
+				adjustLength: false
+			}, {
+				range: -1,
+				prevPage: true,
+				nextPage: true,
+				firstPage: true,
+				lastPage: true
+			}, {
+				range: -1,
+				ends: 0,
+				prevPage: true,
+				nextPage: true,
+				ellipsis: false
+			}, {
+				range: 0,
+				ends: 0,
+				prevPage: true,
+				nextPage: true,
+				ellipsis: false
+			}, {
+				range: 1,
+				ends: 0,
+				firstPage: true,
+				lastPage: true,
+				ellipsis: false
+			}, {
+				range: 2,
+				ends: 0,
+				firstPage: true,
+				lastPage: true,
+				ellipsis: false
+			}, {
+				range: 1,
+				ends: 0,
+				prevPage: true,
+				nextPage: true,
+				firstPage: true,
+				lastPage: true
+			}];
+		});
+	</script>
+
+</body>
+
+</html>

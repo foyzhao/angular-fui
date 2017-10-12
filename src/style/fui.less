@@ -1,0 +1,289 @@
+@charset "UTF-8";
+
+@primaryColor: #618dc2;
+@borderRadius: 4px;
+@animateDuration: .24s;
+@space: " ";
+
+/* reset */
+html {
+	box-sizing: border-box;
+	font: normal 14px 'Microsoft YaHei UI', 'Microsoft YaHei UI Light', 'sans-serif';
+}
+body {
+	margin: 0;
+	padding: 0;
+	font-size: 1rem;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin: 0;
+	padding: 0;
+	font-size: 1rem;
+}
+ul, ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+/*element*/
+.inlineElement() {
+	line-height: 0;
+	outline: none;
+	border-radius: @borderRadius;
+	vertical-align: middle;
+	transition: .2s;
+	font-size: 1.02rem;
+	height: 2.2em;
+	&.small {
+		font-size: .88rem;
+	}
+	&.big {
+		font-size: 1.24rem;
+	}
+}
+input {
+	.inlineElement();
+	box-sizing: border-box;
+	padding: 0 .6em;
+	border: 1px solid #CCC;
+
+	&:focus {
+		border-color: @primaryColor;
+	}
+
+	&[type=checkbox],
+	&[type=radio] {
+		height: auto;
+	}
+}
+.checkable(@radius) {
+	display: inline-block;
+	cursor: pointer;
+	font-size: 1rem;
+
+	&:before {
+		content: @space;
+		font-weight: bold;
+		color: #FFF;
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		line-height: 1em;
+		background-color: #FFF;
+		border: 1px solid @primaryColor;
+		border-radius: @radius;
+		text-align: center;
+		transition: .2s;
+	}
+
+	&:hover:before {
+		content: '✓';
+		color: fadeout(@primaryColor, 60%);
+	}
+
+	&[checked] {
+		&:before {
+			content: '✓';
+			color: #FFF;
+			background-color: @primaryColor;
+		}
+	}
+
+	@disabledColor: #DDD;
+
+	&[disabled] {
+		color: darken(@disabledColor, 16%);
+		cursor: default;
+		&:before {
+			border-color: @disabledColor;
+		}
+		&:hover:before {
+			color: #FFF;
+		}
+		&[checked]:before {
+			background-color: @disabledColor;
+		}
+	}
+
+	&:not(:empty):before {
+		margin-right: .4em;
+	}
+
+	& + & {
+		margin-left: .8em;
+	}
+}
+checkbox {
+	.checkable(2px);
+}
+radio {
+	.checkable(1rem);
+}
+button {
+	@defaultColor: #CCC;
+	@dangerColor: #D00;
+	@disabledColor: #DDD;
+
+	.setColors(@color) {
+		background-color: @color;
+		border: 1px solid @color;
+		color: contrast(@color);
+		&:hover {
+			background-color: lighten(@color, 4%);
+		}
+		&:active {
+			box-shadow: 0 0 4px darken(@color, 4%) inset;
+		}
+	}
+
+	.inlineElement();
+	.setColors(@defaultColor);
+	padding: 0 .8em;
+	cursor: pointer;
+	letter-spacing: .1em;
+	text-indent: .1em;
+
+	&.primary {
+		.setColors(@primaryColor);
+	}
+
+	&.danger {
+		.setColors(@dangerColor);
+	}
+
+	&[disabled] {
+		.setColors(@disabledColor);
+		cursor: default;
+		color: darken(@disabledColor, 16%);
+		&:hover {
+			background-color: @disabledColor;
+		}
+		&:active {
+			box-shadow: none;
+		}
+	}
+
+}
+/* pagination */
+pagination {
+	display: block;
+	text-align: center;
+
+	& > .page-wrapper {
+		display: inline-block;
+		border-radius: @borderRadius;
+
+		& > button {
+			border-radius: 0;
+			min-width: 48px;
+			&:first-child {
+				border-radius: @borderRadius 0 0 @borderRadius;
+			}
+			&:last-child {
+				border-radius: 0 @borderRadius @borderRadius 0;
+			}
+			&.previous-page {
+			}
+			&.ellipsis {
+			}
+		}
+	}
+}
+/* layer */
+layer {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(0, 0, 0, .64);
+	z-index: 999;
+	display: none;
+
+	&.open {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	> .dialog {
+		@dividerColor: #DDD;
+		background: #FFF;
+		border-radius: @borderRadius;
+		box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, .2), 1px 3px 15px 2px rgba(0, 0, 0, .2);
+		display: flex;
+		flex-direction: column;
+
+		> header {
+			padding: .68em 1em;
+			font-size: 1.16rem;
+			font-weight: bold;
+			border-bottom: 1px solid @dividerColor;
+			color: @primaryColor;
+		}
+
+		> .content {
+			padding: 1em;
+			flex-grow: 1;
+
+			&.message {
+				padding: 2em;
+				min-width: 240px;
+				max-width: 400px;
+			}
+		}
+
+		> footer {
+			border-top: 1px solid @dividerColor;
+			display: flex;
+			flex-direction: row;
+			justify-content: flex-end;
+			padding: .4em;
+
+			> button {
+				margin-left: .4em;
+			}
+		}
+	}
+
+	&.ng-enter, &.ng-leave {
+		transition: ease @animateDuration all;
+
+		> .dialog {
+			transition: ease @animateDuration all;
+		}
+	}
+
+	&.ng-enter {
+		opacity: 0;
+
+		> .dialog {
+			transform: scale(.6);
+		}
+
+		&.ng-enter-active {
+			opacity: 1;
+
+			> .dialog {
+				transform: scale(1);
+			}
+		}
+	}
+
+	&.ng-leave {
+		opacity: 1;
+
+		> .dialog {
+			transform: scale(1);
+		}
+
+		&.ng-leave-active {
+			opacity: 0;
+
+			> .dialog {
+				transform: scale(.9);
+			}
+		}
+	}
+}

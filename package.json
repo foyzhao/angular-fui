@@ -1,0 +1,20 @@
+{
+	"name": "angular-fui",
+	"version": "0.1.0",
+	"title": "Foy UI",
+	"description": "Web UI.",
+	"author": "Foy Zhao <foyzhao@gmail.com>",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/foyzhao/angular-fui.git"
+	},
+	"devDependencies": {
+		"jshint": "^2.9.5",
+		"uglifyjs": "^2.4.11"
+	},
+	"scripts": {
+		"lint": "jshint src",
+		"build": "uglifyjs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular.fui.js"
+	}
+}

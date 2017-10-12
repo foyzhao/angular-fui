@@ -1,0 +1,318 @@
+@charset "UTF-8";
+/* reset */
+html {
+  box-sizing: border-box;
+  font: normal 14px 'Microsoft YaHei UI', 'Microsoft YaHei UI Light', 'sans-serif';
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+}
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+/*element*/
+input {
+  line-height: 0;
+  outline: none;
+  border-radius: 4px;
+  vertical-align: middle;
+  transition: .2s;
+  font-size: 1.02rem;
+  height: 2.2em;
+  box-sizing: border-box;
+  padding: 0 .6em;
+  border: 1px solid #CCC;
+}
+input.small {
+  font-size: .88rem;
+}
+input.big {
+  font-size: 1.24rem;
+}
+input:focus {
+  border-color: #618dc2;
+}
+input[type=checkbox],
+input[type=radio] {
+  height: auto;
+}
+checkbox {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1rem;
+}
+checkbox:before {
+  content: " ";
+  font-weight: bold;
+  color: #FFF;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  background-color: #FFF;
+  border: 1px solid #618dc2;
+  border-radius: 2px;
+  text-align: center;
+  transition: .2s;
+}
+checkbox:hover:before {
+  content: '✓';
+  color: rgba(97, 141, 194, 0.4);
+}
+checkbox[checked]:before {
+  content: '✓';
+  color: #FFF;
+  background-color: #618dc2;
+}
+checkbox[disabled] {
+  color: #b4b4b4;
+  cursor: default;
+}
+checkbox[disabled]:before {
+  border-color: #DDD;
+}
+checkbox[disabled]:hover:before {
+  color: #FFF;
+}
+checkbox[disabled][checked]:before {
+  background-color: #DDD;
+}
+checkbox:not(:empty):before {
+  margin-right: .4em;
+}
+checkbox + checkbox {
+  margin-left: .8em;
+}
+radio {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1rem;
+}
+radio:before {
+  content: " ";
+  font-weight: bold;
+  color: #FFF;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1em;
+  background-color: #FFF;
+  border: 1px solid #618dc2;
+  border-radius: 1rem;
+  text-align: center;
+  transition: .2s;
+}
+radio:hover:before {
+  content: '✓';
+  color: rgba(97, 141, 194, 0.4);
+}
+radio[checked]:before {
+  content: '✓';
+  color: #FFF;
+  background-color: #618dc2;
+}
+radio[disabled] {
+  color: #b4b4b4;
+  cursor: default;
+}
+radio[disabled]:before {
+  border-color: #DDD;
+}
+radio[disabled]:hover:before {
+  color: #FFF;
+}
+radio[disabled][checked]:before {
+  background-color: #DDD;
+}
+radio:not(:empty):before {
+  margin-right: .4em;
+}
+radio + radio {
+  margin-left: .8em;
+}
+button {
+  line-height: 0;
+  outline: none;
+  border-radius: 4px;
+  vertical-align: middle;
+  transition: .2s;
+  font-size: 1.02rem;
+  height: 2.2em;
+  background-color: #CCC;
+  border: 1px solid #CCC;
+  color: #000000;
+  padding: 0 .8em;
+  cursor: pointer;
+  letter-spacing: .1em;
+  text-indent: .1em;
+}
+button.small {
+  font-size: .88rem;
+}
+button.big {
+  font-size: 1.24rem;
+}
+button:hover {
+  background-color: #d6d6d6;
+}
+button:active {
+  box-shadow: 0 0 4px #c2c2c2 inset;
+}
+button.primary {
+  background-color: #618dc2;
+  border: 1px solid #618dc2;
+  color: #ffffff;
+}
+button.primary:hover {
+  background-color: #7098c8;
+}
+button.primary:active {
+  box-shadow: 0 0 4px #5282bc inset;
+}
+button.danger {
+  background-color: #D00;
+  border: 1px solid #D00;
+  color: #ffffff;
+}
+button.danger:hover {
+  background-color: #f10000;
+}
+button.danger:active {
+  box-shadow: 0 0 4px #c90000 inset;
+}
+button[disabled] {
+  background-color: #DDD;
+  border: 1px solid #DDD;
+  color: #000000;
+  cursor: default;
+  color: #b4b4b4;
+}
+button[disabled]:hover {
+  background-color: #e7e7e7;
+}
+button[disabled]:active {
+  box-shadow: 0 0 4px #d3d3d3 inset;
+}
+button[disabled]:hover {
+  background-color: #DDD;
+}
+button[disabled]:active {
+  box-shadow: none;
+}
+/* pagination */
+pagination {
+  display: block;
+  text-align: center;
+}
+pagination > .page-wrapper {
+  display: inline-block;
+  border-radius: 4px;
+}
+pagination > .page-wrapper > button {
+  border-radius: 0;
+  min-width: 48px;
+}
+pagination > .page-wrapper > button:first-child {
+  border-radius: 4px 0 0 4px;
+}
+pagination > .page-wrapper > button:last-child {
+  border-radius: 0 4px 4px 0;
+}
+/* layer */
+layer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.64);
+  z-index: 999;
+  display: none;
+}
+layer.open {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+layer > .dialog {
+  background: #FFF;
+  border-radius: 4px;
+  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+layer > .dialog > header {
+  padding: .68em 1em;
+  font-size: 1.16rem;
+  font-weight: bold;
+  border-bottom: 1px solid #DDD;
+  color: #618dc2;
+}
+layer > .dialog > .content {
+  padding: 1em;
+  flex-grow: 1;
+}
+layer > .dialog > .content.message {
+  padding: 2em;
+  min-width: 240px;
+  max-width: 400px;
+}
+layer > .dialog > footer {
+  border-top: 1px solid #DDD;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: .4em;
+}
+layer > .dialog > footer > button {
+  margin-left: .4em;
+}
+layer.ng-enter,
+layer.ng-leave {
+  transition: ease 0.24s all;
+}
+layer.ng-enter > .dialog,
+layer.ng-leave > .dialog {
+  transition: ease 0.24s all;
+}
+layer.ng-enter {
+  opacity: 0;
+}
+layer.ng-enter > .dialog {
+  transform: scale(0.6);
+}
+layer.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+layer.ng-enter.ng-enter-active > .dialog {
+  transform: scale(1);
+}
+layer.ng-leave {
+  opacity: 1;
+}
+layer.ng-leave > .dialog {
+  transform: scale(1);
+}
+layer.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+layer.ng-leave.ng-leave-active > .dialog {
+  transform: scale(0.9);
+}

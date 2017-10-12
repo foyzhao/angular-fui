@@ -1,0 +1,7 @@
+{
+	"globals": {
+		"$": true,
+		"angular": true
+	},
+	"browserify": true
+}

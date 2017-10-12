@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>FUI - Element</title>
+	<link rel="stylesheet" href="../dist/angular.fui.css">
+	<style>
+		p { margin: 20px; }
+	</style>
+</head>
+
+<body ng-controller="Ctrl as ctrl">
+
+	<p>
+		偏小：
+		<input class="small">
+		<button class="small">默认</button>
+		<button class="small primary">确定</button>
+		<button class="small danger">删除</button>
+		<button class="small" disabled>禁用</button>
+	</p>
+	<p>
+		默认：
+		<input>
+		<button>默认</button>
+		<button class="primary">确定</button>
+		<button class="danger">删除</button>
+		<button disabled>禁用</button>
+	</p>
+	<p>
+		偏大：
+		<input class="big">
+		<button class="big">默认</button>
+		<button class="big primary">确定</button>
+		<button class="big danger">删除</button>
+		<button class="big" disabled>禁用</button>
+	</p>
+	<p>
+		多选：
+		<checkbox></checkbox>
+		<checkbox disabled></checkbox>
+		<checkbox checked></checkbox>
+		<checkbox checked disabled></checkbox>
+		<checkbox>文本选项</checkbox>
+		<checkbox disabled>文本选项</checkbox>
+		<checkbox checked>文本选项</checkbox>
+		<checkbox checked disabled>文本选项</checkbox>
+	</p>
+	<p>
+		单选：
+		<radio></radio>
+		<radio disabled></radio>
+		<radio checked></radio>
+		<radio checked disabled></radio>
+		<radio>文本选项</radio>
+		<radio disabled>文本选项</radio>
+		<radio checked>文本选项</radio>
+		<radio checked disabled>文本选项</radio>
+	</p>
+	<p>
+		可以取消：
+		<radio ng-model="ctrl.radioValue" ng-repeat="item in ctrl.options" value="item">选项{{item}}</radio>
+	</p>
+	<p>
+		不可取消：
+		<radio ng-model="ctrl.radioValue" ng-repeat="item in ctrl.options" value="item" required>选项{{item}}</radio>
+	</p>
+
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/angular.js"></script>
+	<script src="../lib/angular-animate.js"></script>
+	<script src="../dist/angular.fui.js"></script>
+	<script>
+		angular.module('demoApp', ['ngAnimate', 'fui']).controller('Ctrl', function() {
+			this.options = [1, 2, 3, 4];
+		});
+	</script>
+
+</body>
+
+</html>
