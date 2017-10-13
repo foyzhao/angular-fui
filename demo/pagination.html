@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html ng-app="demo">
+<html ng-app="demoApp">
 
 <head>
 	<meta charset="UTF-8">
-	<title>FUI - Paginate</title>
+	<title>FUI - Pagination</title>
 	<link rel="stylesheet" href="../dist/angular.fui.css">
 	<style>
 		p { margin: 20px; }
@@ -12,7 +12,7 @@
 	</style>
 </head>
 
-<body ng-controller="DemoController">
+<body ng-controller="Ctrl">
 
 	<p>
 		<checkbox ng-model="pageOption.zeroStart">首页从0开始</checkbox>
@@ -47,7 +47,7 @@
 	<script src="../lib/angular-animate.js"></script>
 	<script src="../dist/angular.fui.js"></script>
 	<script>
-		angular.module('demo', ['fui']).value('fuiOption', {
+		angular.module('demoApp', ['fui']).value('fuiOption', {
 			paginate: {
 				// global settings at here
 				zeroStart: false, // boolean
@@ -62,7 +62,7 @@
 				currentPageEnable: true // boolean
 
 			}
-		}).controller('DemoController', function($scope) {
+		}).controller('Ctrl', function($scope) {
 			// local settings at here
 			$scope.pageOption = {
 				zeroStart: false,

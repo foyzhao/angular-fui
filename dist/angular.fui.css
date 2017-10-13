@@ -259,11 +259,12 @@ layer > .dialog {
   flex-direction: column;
 }
 layer > .dialog > header {
-  padding: .68em 1em;
-  font-size: 1.16rem;
-  font-weight: bold;
-  border-bottom: 1px solid #DDD;
-  color: #618dc2;
+  padding: .72em 1em;
+  font-size: 1.2rem;
+  letter-spacing: .1em;
+  background-color: #618dc2;
+  border-radius: 4px 4px 0 0;
+  color: #ffffff;
 }
 layer > .dialog > .content {
   padding: 1em;
@@ -275,9 +276,9 @@ layer > .dialog > .content.message {
   max-width: 400px;
 }
 layer > .dialog > footer {
-  border-top: 1px solid #DDD;
   display: flex;
   flex-direction: row;
+  border-radius: 0 0 4px 4px;
   justify-content: flex-end;
   padding: .4em;
 }

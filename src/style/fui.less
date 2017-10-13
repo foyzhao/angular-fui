@@ -216,11 +216,12 @@ layer {
 		flex-direction: column;
 
 		> header {
-			padding: .68em 1em;
-			font-size: 1.16rem;
-			font-weight: bold;
-			border-bottom: 1px solid @dividerColor;
-			color: @primaryColor;
+			padding: .72em 1em;
+			font-size: 1.2rem;
+			letter-spacing: .1em;
+			background-color: @primaryColor;
+			border-radius: @borderRadius @borderRadius 0 0;
+			color: contrast(@primaryColor);
 		}
 
 		> .content {
@@ -235,9 +236,9 @@ layer {
 		}
 
 		> footer {
-			border-top: 1px solid @dividerColor;
 			display: flex;
 			flex-direction: row;
+			border-radius: 0 0 @borderRadius @borderRadius;
 			justify-content: flex-end;
 			padding: .4em;
 
