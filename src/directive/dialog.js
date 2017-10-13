@@ -4,32 +4,34 @@
 
 	function dialogDirective() {
 
-		var dialogTemplate = '' +
+		// @formatter:off
+		var dialogTemplate =
 			'<div class="dialog" ng-style="$$dialog.style">' +
-			'<header ng-if="$$dialog.title">{{$$dialog.title}}</header>' +
-			'<div ' +
-			'class="content" ' +
-			'ng-class="$$dialog.contentType" ' +
-			'ng-if="$$dialog.contentTemplateUrl" ' +
-			'ng-include="$$dialog.contentTemplateUrl"></div>' +
-			'<div ' +
-			'class="content" ' +
-			'ng-class="$$dialog.contentType" ' +
-			'ng-if="!$$dialog.contentTemplateUrl && $$dialog.contentTemplate" ' +
-			'ng-bind-html="$$dialog.contentTemplate | trust"></div>' +
-			'<div ' +
-			'class="content" ' +
-			'ng-class="$$dialog.contentType" ' +
-			'ng-if="!$$dialog.contentTemplateUrl && !$$dialog.contentTemplate" ' +
-			'ng-bind="$$dialog.content"></div>' +
-			'<footer ng-if="$$dialog.actions">' +
-			'<button ' +
-			'ng-repeat="action in $$dialog.actions" ' +
-			'ng-click="$$invoke(action.action)"' +
-			'ng-class="action.type"' +
-			'ng-style="action.style">{{action.name}}</button>' +
-			'</footer>' +
+				'<header ng-if="$$dialog.title">{{$$dialog.title}}</header>' +
+				'<div ' +
+					'class="content" ' +
+					'ng-class="$$dialog.contentType" ' +
+					'ng-if="$$dialog.contentTemplateUrl" ' +
+					'ng-include="$$dialog.contentTemplateUrl"></div>' +
+				'<div ' +
+					'class="content" ' +
+					'ng-class="$$dialog.contentType" ' +
+					'ng-if="!$$dialog.contentTemplateUrl && $$dialog.contentTemplate" ' +
+					'ng-bind-html="$$dialog.contentTemplate | trust"></div>' +
+				'<div ' +
+					'class="content" ' +
+					'ng-class="$$dialog.contentType" ' +
+					'ng-if="!$$dialog.contentTemplateUrl && !$$dialog.contentTemplate" ' +
+					'ng-bind="$$dialog.content"></div>' +
+				'<footer ng-if="$$dialog.actions">' +
+					'<button ' +
+						'ng-repeat="action in $$dialog.actions" ' +
+						'ng-click="$$invoke(action.action)"' +
+						'ng-class="action.type"' +
+						'ng-style="action.style">{{action.name}}</button>' +
+				'</footer>' +
 			'</div>';
+		// @formatter:on
 
 		return {
 			restrict: 'A',

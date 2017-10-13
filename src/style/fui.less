@@ -152,14 +152,14 @@ button {
 	}
 
 	&[disabled] {
-		.setColors(@disabledColor);
-		cursor: default;
-		color: darken(@disabledColor, 16%);
+		.setColors(@disabledColor) !important;
+		cursor: default !important;
+		color: darken(@disabledColor, 16%) !important;
 		&:hover {
-			background-color: @disabledColor;
+			background-color: @disabledColor !important;
 		}
 		&:active {
-			box-shadow: none;
+			box-shadow: none !important;
 		}
 	}
 
@@ -182,9 +182,18 @@ pagination {
 			&:last-child {
 				border-radius: 0 @borderRadius @borderRadius 0;
 			}
-			&.previous-page {
+			&.current {
+				border-color: @primaryColor;
+				background: @primaryColor;
+			}
+			&.spread {
+				background: lighten(@primaryColor, 20%);
 			}
 			&.ellipsis {
+				background: #AAA;
+			}
+			&.action {
+				background: #aa827d;
 			}
 		}
 	}

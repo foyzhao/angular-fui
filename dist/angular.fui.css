@@ -197,23 +197,23 @@ button.danger:active {
   box-shadow: 0 0 4px #c90000 inset;
 }
 button[disabled] {
-  background-color: #DDD;
-  border: 1px solid #DDD;
-  color: #000000;
-  cursor: default;
-  color: #b4b4b4;
+  background-color: #DDD !important;
+  border: 1px solid #DDD !important;
+  color: #000000 !important;
+  cursor: default !important;
+  color: #b4b4b4 !important;
 }
 button[disabled]:hover {
-  background-color: #e7e7e7;
+  background-color: #e7e7e7 !important;
 }
 button[disabled]:active {
-  box-shadow: 0 0 4px #d3d3d3 inset;
+  box-shadow: 0 0 4px #d3d3d3 inset !important;
 }
 button[disabled]:hover {
-  background-color: #DDD;
+  background-color: #DDD !important;
 }
 button[disabled]:active {
-  box-shadow: none;
+  box-shadow: none !important;
 }
 /* pagination */
 pagination {
@@ -233,6 +233,19 @@ pagination > .page-wrapper > button:first-child {
 }
 pagination > .page-wrapper > button:last-child {
   border-radius: 0 4px 4px 0;
+}
+pagination > .page-wrapper > button.current {
+  border-color: #618dc2;
+  background: #618dc2;
+}
+pagination > .page-wrapper > button.spread {
+  background: #abc2de;
+}
+pagination > .page-wrapper > button.ellipsis {
+  background: #AAA;
+}
+pagination > .page-wrapper > button.action {
+  background: #aa827d;
 }
 /* layer */
 layer {

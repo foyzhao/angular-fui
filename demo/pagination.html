@@ -32,15 +32,18 @@
 		<checkbox ng-model="pageOption.firstPage">首页：</checkbox><input ng-model="pageOption.firstPage">
 		<checkbox ng-model="pageOption.lastPage">尾页：</checkbox><input ng-model="pageOption.lastPage">
 	</p>
-	<pagination option="pageOption" on-pick="list($page)"></pagination>
+	<paginate option="pageOption" on-pick="list($page)"></paginate>
 	<hr>
-	<pagination ng-repeat="instance in instances" option="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></pagination>
+	<paginate ng-repeat="instance in instances" option="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></paginate>
 	<hr>
-	<pagination ng-init="temp={page:1,totalPage:10,size:100}" option="temp" on-pick="temp.page=$page">
+	<paginate ng-init="temp={page:1,totalPage:10,size:100}" option="temp" on-pick="temp.page=$page">
 		<span> {{temp.page}} / {{temp.totalPage}} </span>
 		<span> {{temp.size}} elements </span>
 		<p>Something else will be ignored</p>
-	</pagination>
+	</paginate>
+	<hr>
+	<p><pagination current="0" total="5" ng-repeat="i in [1,2]"></pagination></p>
+	<p><pagination options="pageOption" current="pageOption.page" total="pageOption.totalPage" on-pick="pageOption.page=$page"></pagination></p>
 
 	<script src="../lib/jquery.js"></script>
 	<script src="../lib/angular.js"></script>
@@ -65,18 +68,18 @@
 		}).controller('Ctrl', function($scope) {
 			// local settings at here
 			$scope.pageOption = {
-				zeroStart: false,
-				page: 1,
-				totalPage: 24,
-				range: 2,
-				ends: 2,
-				ellipsis: true,
-				prevPage: null,
-				nextPage: null,
-				firstPage: null,
-				lastPage: null,
-				adjustLength: true,
-				currentPageEnable: true
+				indexZero: false,
+				page: 5,
+				totalPage: 20,
+				spreadLength: 1,
+				//ellipsis: null,
+				endLength: 3,
+				//prevPage: null,
+				//nextPage: null,
+				//firstPage: null,
+				//lastPage: null,
+				adjustSpreadLength: false,
+				disableCurrentPage: true
 			};
 			$scope.list = function(page) {
 				// do ajax and then update the current page
