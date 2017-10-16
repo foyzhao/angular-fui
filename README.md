@@ -18,6 +18,5 @@
 
 `<pagination current="1" total="10" on-pick="callbackFunction($page)"></div>`
 
-### Feature
+##### Feature
 The ellipsis can be clicked to quickly cruise the page number.
-[Demo](http://htmlpreview.github.io/?https://raw.githubusercontent.com/foyzhao/angular-paginate/master/demo/pagination.html)
