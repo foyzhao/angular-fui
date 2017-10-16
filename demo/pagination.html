@@ -7,129 +7,51 @@
 	<link rel="stylesheet" href="../dist/angular.fui.css">
 	<style>
 		p { margin: 20px; }
-		input { width: 80px; }
-		pagination { margin: 12px; }
+		input { width: 100px; }
+		pagination { margin: 20px; }
 	</style>
 </head>
 
-<body ng-controller="Ctrl">
+<body ng-controller="Ctrl as ctrl">
 
 	<p>
-		<checkbox ng-model="pageOption.zeroStart">首页从0开始</checkbox>
-		<checkbox ng-model="pageOption.adjustLength">控制总长度不变</checkbox>
-		<checkbox ng-model="pageOption.currentPageEnable">当前页是否可用</checkbox>
+		当前页: <input type="number" ng-model="ctrl.page">&emsp;
+		总页数: <input type="number" ng-model="ctrl.totalPage">
 	</p>
-	<p>
-		当前页: <input type="number" ng-model="pageOption.page">
-		总页数: <input type="number" ng-model="pageOption.totalPage">
-		当前页两边显示数量: <input type="number" ng-model="pageOption.range">
-		两端显示数量: <input type="number" ng-model="pageOption.ends">
-	</p>
-	<p>
-		<checkbox ng-model="pageOption.ellipsis">省略号：</checkbox><input ng-model="pageOption.ellipsis">
-		<checkbox ng-model="pageOption.prevPage">上一页：</checkbox><input ng-model="pageOption.prevPage">
-		<checkbox ng-model="pageOption.nextPage">下一页：</checkbox><input ng-model="pageOption.nextPage">
-		<checkbox ng-model="pageOption.firstPage">首页：</checkbox><input ng-model="pageOption.firstPage">
-		<checkbox ng-model="pageOption.lastPage">尾页：</checkbox><input ng-model="pageOption.lastPage">
-	</p>
-	<paginate option="pageOption" on-pick="list($page)"></paginate>
-	<hr>
-	<paginate ng-repeat="instance in instances" option="instance" page="$parent.instancePage" total-page="$parent.instanceTotalPage" on-pick="$parent.instancePage=$page"></paginate>
-	<hr>
-	<paginate ng-init="temp={page:1,totalPage:10,size:100}" option="temp" on-pick="temp.page=$page">
-		<span> {{temp.page}} / {{temp.totalPage}} </span>
-		<span> {{temp.size}} elements </span>
-		<p>Something else will be ignored</p>
-	</paginate>
-	<hr>
-	<p><pagination current="0" total="5" ng-repeat="i in [1,2]"></pagination></p>
-	<p><pagination options="pageOption" current="pageOption.page" total="pageOption.totalPage" on-pick="pageOption.page=$page"></pagination></p>
+
+	<pagination current="ctrl.page" total="ctrl.totalPage" on-pick="ctrl.page=$page"></pagination>
+
+	<pagination current="ctrl.page" total="ctrl.totalPage" on-pick="ctrl.page=$page" options="ctrl.mini"></pagination>
+
+	<pagination current="ctrl.page" total="ctrl.totalPage" on-pick="ctrl.page=$page" options="ctrl.mini">{{ctrl.page}}/{{ctrl.totalPage}}</pagination>
+
+	<pagination current="ctrl.page" total="ctrl.totalPage" on-pick="ctrl.page=$page" options="ctrl.custom"></pagination>
 
 	<script src="../lib/jquery.js"></script>
 	<script src="../lib/angular.js"></script>
 	<script src="../lib/angular-animate.js"></script>
 	<script src="../dist/angular.fui.js"></script>
 	<script>
-		angular.module('demoApp', ['fui']).value('fuiOption', {
-			paginate: {
-				// global settings at here
-				zeroStart: false, // boolean
-				range: 5, // integer
-				ends: 1, // integer
-				ellipsis: true, // boolean | string
-				prevPage: null, // boolean | string
-				nextPage: null, // boolean | string
-				firstPage: null, // boolean | string
-				lastPage: null, // boolean | string
-				adjustLength: true, // boolean
-				currentPageEnable: true // boolean
+		angular.module('demoApp', ['fui']).controller('Ctrl', function() {
 
-			}
-		}).controller('Ctrl', function($scope) {
-			// local settings at here
-			$scope.pageOption = {
-				indexZero: false,
-				page: 5,
-				totalPage: 20,
-				spreadLength: 1,
-				//ellipsis: null,
-				endLength: 3,
-				//prevPage: null,
-				//nextPage: null,
-				//firstPage: null,
-				//lastPage: null,
-				adjustSpreadLength: false,
-				disableCurrentPage: true
+			this.page = 0;
+			this.totalPage = 100;
+
+			this.mini = {
+				showPages: false,
+				showActions: true,
+				firstPage: null,
+				lastPage: null
 			};
-			$scope.list = function(page) {
-				// do ajax and then update the current page
-				$scope.pageOption.page = page;
+
+			this.custom = {
+				showActions: true,
+				prevPage: '上一页',
+				nextPage: '下一页',
+				firstPage: '首页',
+				lastPage: '末页'
 			};
-			/* 示例 */
-			$scope.instancePage = 1;
-			$scope.instanceTotalPage = 20;
-			$scope.instances = [{
-				// default
-			}, {
-				adjustLength: false
-			}, {
-				range: -1,
-				prevPage: true,
-				nextPage: true,
-				firstPage: true,
-				lastPage: true
-			}, {
-				range: -1,
-				ends: 0,
-				prevPage: true,
-				nextPage: true,
-				ellipsis: false
-			}, {
-				range: 0,
-				ends: 0,
-				prevPage: true,
-				nextPage: true,
-				ellipsis: false
-			}, {
-				range: 1,
-				ends: 0,
-				firstPage: true,
-				lastPage: true,
-				ellipsis: false
-			}, {
-				range: 2,
-				ends: 0,
-				firstPage: true,
-				lastPage: true,
-				ellipsis: false
-			}, {
-				range: 1,
-				ends: 0,
-				prevPage: true,
-				nextPage: true,
-				firstPage: true,
-				lastPage: true
-			}];
+
 		});
 	</script>
 

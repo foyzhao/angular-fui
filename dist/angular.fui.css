@@ -28,13 +28,12 @@ ol {
 }
 /*element*/
 input {
-  line-height: 0;
   outline: none;
   border-radius: 4px;
-  vertical-align: middle;
   transition: .2s;
-  font-size: 1.02rem;
-  height: 2.2em;
+  font-size: 1rem;
+  height: 2.22em;
+  line-height: 1em;
   box-sizing: border-box;
   padding: 0 .6em;
   border: 1px solid #CCC;
@@ -147,20 +146,20 @@ radio + radio {
   margin-left: .8em;
 }
 button {
-  line-height: 0;
   outline: none;
   border-radius: 4px;
-  vertical-align: middle;
   transition: .2s;
-  font-size: 1.02rem;
-  height: 2.2em;
+  font-size: 1rem;
+  height: 2.22em;
+  line-height: 1em;
   background-color: #CCC;
-  border: 1px solid #CCC;
   color: #000000;
+  box-sizing: border-box;
   padding: 0 .8em;
   cursor: pointer;
   letter-spacing: .1em;
   text-indent: .1em;
+  border: none;
 }
 button.small {
   font-size: .88rem;
@@ -176,7 +175,6 @@ button:active {
 }
 button.primary {
   background-color: #618dc2;
-  border: 1px solid #618dc2;
   color: #ffffff;
 }
 button.primary:hover {
@@ -187,7 +185,6 @@ button.primary:active {
 }
 button.danger {
   background-color: #D00;
-  border: 1px solid #D00;
   color: #ffffff;
 }
 button.danger:hover {
@@ -198,7 +195,6 @@ button.danger:active {
 }
 button[disabled] {
   background-color: #DDD !important;
-  border: 1px solid #DDD !important;
   color: #000000 !important;
   cursor: default !important;
   color: #b4b4b4 !important;
@@ -220,32 +216,31 @@ pagination {
   display: block;
   text-align: center;
 }
-pagination > .page-wrapper {
-  display: inline-block;
-  border-radius: 4px;
+pagination > span {
+  margin-right: 8px;
 }
-pagination > .page-wrapper > button {
+pagination > span:empty {
+  display: none;
+}
+pagination > pagebar {
+  display: inline-block;
+}
+pagination > pagebar > button {
   border-radius: 0;
   min-width: 48px;
 }
-pagination > .page-wrapper > button:first-child {
+pagination > pagebar > button:first-child {
   border-radius: 4px 0 0 4px;
 }
-pagination > .page-wrapper > button:last-child {
+pagination > pagebar > button:last-child {
   border-radius: 0 4px 4px 0;
 }
-pagination > .page-wrapper > button.current {
+pagination > pagebar > button:only-child {
+  border-radius: 4px;
+}
+pagination > pagebar > button.current {
   border-color: #618dc2;
   background: #618dc2;
-}
-pagination > .page-wrapper > button.spread {
-  background: #abc2de;
-}
-pagination > .page-wrapper > button.ellipsis {
-  background: #AAA;
-}
-pagination > .page-wrapper > button.action {
-  background: #aa827d;
 }
 /* layer */
 layer {

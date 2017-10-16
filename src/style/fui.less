@@ -27,13 +27,12 @@ ul, ol {
 }
 /*element*/
 .inlineElement() {
-	line-height: 0;
 	outline: none;
 	border-radius: @borderRadius;
-	vertical-align: middle;
 	transition: .2s;
-	font-size: 1.02rem;
-	height: 2.2em;
+	font-size: 1rem;
+	height: 2.22em;
+	line-height: 1em;
 	&.small {
 		font-size: .88rem;
 	}
@@ -126,7 +125,6 @@ button {
 
 	.setColors(@color) {
 		background-color: @color;
-		border: 1px solid @color;
 		color: contrast(@color);
 		&:hover {
 			background-color: lighten(@color, 4%);
@@ -138,10 +136,12 @@ button {
 
 	.inlineElement();
 	.setColors(@defaultColor);
+	box-sizing: border-box;
 	padding: 0 .8em;
 	cursor: pointer;
 	letter-spacing: .1em;
 	text-indent: .1em;
+	border: none;
 
 	&.primary {
 		.setColors(@primaryColor);
@@ -168,11 +168,14 @@ button {
 pagination {
 	display: block;
 	text-align: center;
-
-	& > .page-wrapper {
+	& > span {
+		margin-right: 8px;
+		&:empty {
+			display: none;
+		}
+	}
+	& > pagebar {
 		display: inline-block;
-		border-radius: @borderRadius;
-
 		& > button {
 			border-radius: 0;
 			min-width: 48px;
@@ -182,18 +185,12 @@ pagination {
 			&:last-child {
 				border-radius: 0 @borderRadius @borderRadius 0;
 			}
+			&:only-child {
+				border-radius: @borderRadius;
+			}
 			&.current {
 				border-color: @primaryColor;
 				background: @primaryColor;
-			}
-			&.spread {
-				background: lighten(@primaryColor, 20%);
-			}
-			&.ellipsis {
-				background: #AAA;
-			}
-			&.action {
-				background: #aa827d;
 			}
 		}
 	}
