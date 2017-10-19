@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="demoApp">
+
+<head>
+	<meta charset="UTF-8">
+	<title>FUI - Dialogue</title>
+	<link rel="stylesheet" href="../dist/angular.fui.css">
+	<style>
+		body > header { position: fixed; z-index: 2000; background: #FFF; padding: 4px; margin: 4px; }
+	</style>
+</head>
+
+<body ng-controller="Ctrl as ctrl">
+
+	<header>
+		id:{{$id}}
+		<checkbox ng-model="ctrl.isOpen1">弹窗1</checkbox>
+		<checkbox ng-model="ctrl.isOpen11">弹窗11</checkbox>
+		<checkbox ng-model="ctrl.isOpen2">弹窗2</checkbox>
+		<checkbox ng-model="ctrl.isOpen3">弹窗3</checkbox>
+	</header>
+
+	<dialogue ng-open="ctrl.isOpen1" style="width:600px;height:400px">
+		<header>弹窗1标题</header>
+		<div class="content">
+			<p>定义了宽度600px，高度400px，所在SCOPE的ID为:{{$id}}</p>
+			<dialogue ng-open="ctrl.isOpen11">
+				<header>弹窗1子弹窗标题</header>
+				<div class="content">
+					<p>没有定义宽高，大小适应内容，所在SCOPE的ID为:{{$id}}</p>
+				</div>
+				<footer>
+					<button ng-click="ctrl.isOpen11=false">关闭</button>
+				</footer>
+			</dialogue>
+		</div>
+		<footer>
+			<button class="primary" ng-click="ctrl.isOpen11=true">打开子弹窗</button>
+			<button ng-click="ctrl.isOpen1=false">关闭</button>
+		</footer>
+	</dialogue>
+
+	<dialogue ng-open="ctrl.isOpen2">
+		<div class="content">
+			<p>没有标题的弹窗2，所在SCOPE的ID为:{{$id}}</p>
+		</div>
+		<footer>
+			<button ng-click="ctrl.isOpen2=false">关闭</button>
+		</footer>
+	</dialogue>
+
+	<dialogue ng-open="ctrl.isOpen3">
+		<header>弹窗3标题</header>
+		<div class="content">
+			<p>没有操作按钮的弹窗，所在SCOPE的ID为:{{$id}}</p>
+		</div>
+	</dialogue>
+
+	<script src="../lib/jquery.js"></script>
+	<script src="../lib/angular.js"></script>
+	<script src="../lib/angular-animate.js"></script>
+	<script src="../dist/angular.fui.js"></script>
+	<script>
+		angular.module('demoApp', ['ngAnimate', 'fui']).controller('Ctrl', function(dialogue) {
+			this.confirm = function() {
+				dialogue
+					.confirm('这是一个确认弹窗，是否弹出警示框?')
+					.then(function() {
+						dialog.alert('这是一个警示框');
+					});
+			};
+		});
+	</script>
+
+</body>
+
+</html>

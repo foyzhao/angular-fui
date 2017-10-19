@@ -1,8 +1,8 @@
 (function() {
 
-	angular.module('fui').service('dialog', dialogService);
+	angular.module('fui').service('dialogue', DialogueService);
 
-	function dialogService($rootScope, $compile, $q) {
+	function DialogueService($rootScope, $compile, $q) {
 
 		var layerTemplate = '' +
 			'<layer ' +
@@ -71,6 +71,6 @@
 
 	}
 
-	dialogService.$inject = ['$rootScope', '$compile', '$q'];
+	DialogueService.$inject = ['$rootScope', '$compile', '$q'];
 
 })();

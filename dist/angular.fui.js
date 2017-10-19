@@ -104,67 +104,60 @@ angular.module("fui", []);
 })();
 
 (function() {
-    angular.module("fui").directive("layer", layerDirective);
-    function layerDirective() {
+    angular.module("fui").directive("dialogue", dialogueDirective);
+    function dialogueDirective() {
         return {
             restrict: "E",
-            priority: 1e3,
             transclude: "element",
-            controller: LayerController
+            controller: DialogueController
         };
     }
-    function LayerController($scope, $element, $attrs, $parse, $transclude, $animate) {
-        var layerElement, layerScope, ctrl = this;
-        ctrl.$open = open;
-        ctrl.$close = close;
-        ctrl.$onInit = onInit;
-        ctrl.$onDestroy = onDestroy;
-        if ($attrs.name) {
-            var fn = $parse($attrs.name);
-            if (fn.assign) {
-                fn.assign($scope, ctrl);
-            }
-        }
-        function onInit() {
-            $scope.$eval($attrs.onInit, {
-                $layer: ctrl
+    function DialogueController($compile, $element, $attrs, $transclude, $animate) {
+        var $layer, $dialogue, transcludeScope;
+        this.$onInit = init;
+        this.$open = open;
+        this.$close = close;
+        this.$onDestroy = destroy;
+        function init() {
+            $element.appendTo(document.body);
+            $attrs.$observe("open", function(isOpen) {
+                if (isOpen !== undefined && isOpen !== false) {
+                    open();
+                } else {
+                    close();
+                }
             });
         }
-        function onOpen() {
-            $scope.$eval($attrs.onOpen);
-        }
-        function onClose() {
-            $scope.$eval($attrs.onClose);
-        }
-        function onDestroy() {
-            $element.remove();
-            close();
-        }
         function open() {
-            if (!layerElement) {
+            if (!$layer) {
                 if (!$element.is(":last-child")) {
-                    $element.appendTo($element.parent());
+                    $element.appendTo(document.body);
                 }
                 $transclude(function(clone, scope) {
-                    layerElement = clone.addClass("open");
-                    $animate.enter(layerElement, $element.parent(), $element);
-                    layerScope = scope;
-                    layerScope.$layer = ctrl;
+                    $dialogue = clone;
+                    $layer = $compile("<layer ng-animate-children/>")(scope);
+                    $animate.enter($layer, null, $element);
+                    $animate.enter($dialogue, $layer);
+                    transcludeScope = scope;
                 });
-                onOpen();
             }
         }
         function close() {
-            if (layerElement) {
-                $animate.leave(layerElement);
-                layerElement = null;
-                layerScope.$destroy();
-                layerScope = null;
-                onClose();
+            if ($layer) {
+                $animate.leave($layer);
+                $animate.leave($dialogue);
+                $layer = null;
+                $dialogue = null;
+                transcludeScope.$destroy();
+                transcludeScope = null;
             }
         }
+        function destroy() {
+            close();
+            $element.remove();
+        }
     }
-    LayerController.$inject = [ "$scope", "$element", "$attrs", "$parse", "$transclude", "$animate" ];
+    DialogueController.$inject = [ "$compile", "$element", "$attrs", "$transclude", "$animate" ];
 })();
 
 (function() {
@@ -510,8 +503,8 @@ angular.module("fui", []);
 })();
 
 (function() {
-    angular.module("fui").service("dialog", dialogService);
-    function dialogService($rootScope, $compile, $q) {
+    angular.module("fui").service("dialogue", DialogueService);
+    function DialogueService($rootScope, $compile, $q) {
         var layerTemplate = "" + "<layer " + 'id="layer-{{$id}}"' + 'dialog="$$dialog" ' + 'on-init="$layer.$open()" ' + 'on-close="$destroy()"></layer>';
         this.open = function(options) {
             var childScope = $rootScope.$new();
@@ -567,5 +560,5 @@ angular.module("fui", []);
             return deferred.promise;
         };
     }
-    dialogService.$inject = [ "$rootScope", "$compile", "$q" ];
+    DialogueService.$inject = [ "$rootScope", "$compile", "$q" ];
 })();
