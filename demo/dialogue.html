@@ -72,16 +72,14 @@
 					.confirm('这是一个确认弹窗，是否弹出警示框?')
 					.then(function() {
 						dialogue.alert('这是一个警示框');
+					}, function() {
+
 					});
 			};
 			this.customDialogue = function() {
 				var destroy = dialogue.open({
 					title: '自定义弹窗的标题',
 					contentTemplateUrl: 'custom-dialog-content',
-					style: {
-						width: 400,
-						height: 300
-					},
 					actions: [{
 						name: '我知道了',
 						type: 'primary',

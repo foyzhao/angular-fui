@@ -6,7 +6,7 @@
 
 		// @formatter:off
 		var dialogueTemplate =
-			'<dialogue ng-style="$$dialog.style" open>' +
+			'<dialogue open>' +
 				'<header ng-if="$$dialog.title">{{$$dialog.title}}</header>' +
 				'<div ' +
 					'class="content" ' +
