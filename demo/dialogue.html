@@ -13,11 +13,12 @@
 <body ng-controller="Ctrl as ctrl">
 
 	<header>
-		id:{{$id}}
 		<checkbox ng-model="ctrl.isOpen1">弹窗1</checkbox>
 		<checkbox ng-model="ctrl.isOpen11">弹窗11</checkbox>
 		<checkbox ng-model="ctrl.isOpen2">弹窗2</checkbox>
 		<checkbox ng-model="ctrl.isOpen3">弹窗3</checkbox>
+		<button ng-click="ctrl.confirm()">打开确认框</button>
+		<button ng-click="ctrl.customDialogue()">打开自定义框</button>
 	</header>
 
 	<dialogue ng-open="ctrl.isOpen1" style="width:600px;height:400px">
@@ -56,6 +57,10 @@
 		</div>
 	</dialogue>
 
+	<script type="text/ng-template" id="custom-dialog-content">
+		<p>自定义弹窗的内容，所在SCOPE的ID为:{{$id}}</p>
+	</script>
+
 	<script src="../lib/jquery.js"></script>
 	<script src="../lib/angular.js"></script>
 	<script src="../lib/angular-animate.js"></script>
@@ -66,8 +71,25 @@
 				dialogue
 					.confirm('这是一个确认弹窗，是否弹出警示框?')
 					.then(function() {
-						dialog.alert('这是一个警示框');
+						dialogue.alert('这是一个警示框');
 					});
+			};
+			this.customDialogue = function() {
+				var destroy = dialogue.open({
+					title: '自定义弹窗的标题',
+					contentTemplateUrl: 'custom-dialog-content',
+					style: {
+						width: 400,
+						height: 300
+					},
+					actions: [{
+						name: '我知道了',
+						type: 'primary',
+						action: function() {
+							destroy();
+						}
+					}]
+				});
 			};
 		});
 	</script>
