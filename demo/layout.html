@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>FUI - Layout</title>
+	<link rel="stylesheet" href="../dist/angular-fui.css">
+	<style>
+		p { border: 1px solid blue; }
+		div { border: 1px solid red; }
+	</style>
+</head>
+
+<body>
+
+	<linear>
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+	</linear>
+
+	<linear class="end">
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+	</linear>
+
+	<linear class="vertical" style="height:300px">
+		<p>1</p>
+		<p>2</p>
+		<p>3</p>
+	</linear>
+
+	<linear class="vertical end" style="height:300px">
+		<p>1</p>
+		<p class="stretch">2</p>
+		<p>3</p>
+	</linear>
+
+</body>
+
+</html>

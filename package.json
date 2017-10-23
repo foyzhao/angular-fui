@@ -15,6 +15,6 @@
 	},
 	"scripts": {
 		"lint": "jshint src",
-		"build": "uglifyjs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular.fui.js"
+		"build": "uglifyjs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular-fui.js"
 	}
 }

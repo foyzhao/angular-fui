@@ -283,6 +283,7 @@ dialogue {
 	> .content {
 		padding: 1em;
 		flex-grow: 1;
+		overflow: auto;
 
 		&.message {
 			padding: 2em;
@@ -304,3 +305,20 @@ dialogue {
 	}
 }
 layer > dialogue { display: flex; }
+/* Layout */
+linear {
+	display: flex;
+
+	&.vertical {
+		flex-direction: column;
+	}
+
+	&.end {
+		justify-content: flex-end;
+	}
+
+	> .stretch {
+		flex-grow: 1;
+		overflow: auto;
+	}
+}
