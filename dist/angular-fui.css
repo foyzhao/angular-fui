@@ -19,6 +19,7 @@ p {
   margin: 0;
   padding: 0;
   font-size: 1rem;
+  font-weight: normal;
 }
 ul,
 ol {
@@ -30,13 +31,13 @@ ol {
 input {
   outline: none;
   border-radius: 4px;
-  transition: .2s;
   font-size: 1rem;
   height: 2.22em;
   line-height: 1em;
   box-sizing: border-box;
   padding: 0 .6em;
   border: 1px solid #CCC;
+  transition: 0.2s border-color;
 }
 input.small {
   font-size: .88rem;
@@ -45,7 +46,7 @@ input.big {
   font-size: 1.24rem;
 }
 input:focus {
-  border-color: #618dc2;
+  border-color: #00aac2;
 }
 input[type=checkbox],
 input[type=radio] {
@@ -65,19 +66,19 @@ checkbox:before {
   height: 1em;
   line-height: 1em;
   background-color: #FFF;
-  border: 1px solid #618dc2;
+  border: 1px solid #00aac2;
   border-radius: 2px;
   text-align: center;
   transition: .2s;
 }
 checkbox:hover:before {
   content: '✓';
-  color: rgba(97, 141, 194, 0.4);
+  color: rgba(0, 170, 194, 0.4);
 }
 checkbox[checked]:before {
   content: '✓';
   color: #FFF;
-  background-color: #618dc2;
+  background-color: #00aac2;
 }
 checkbox[disabled] {
   color: #b4b4b4;
@@ -112,19 +113,19 @@ radio:before {
   height: 1em;
   line-height: 1em;
   background-color: #FFF;
-  border: 1px solid #618dc2;
+  border: 1px solid #00aac2;
   border-radius: 1rem;
   text-align: center;
   transition: .2s;
 }
 radio:hover:before {
   content: '✓';
-  color: rgba(97, 141, 194, 0.4);
+  color: rgba(0, 170, 194, 0.4);
 }
 radio[checked]:before {
   content: '✓';
   color: #FFF;
-  background-color: #618dc2;
+  background-color: #00aac2;
 }
 radio[disabled] {
   color: #b4b4b4;
@@ -148,7 +149,6 @@ radio + radio {
 button {
   outline: none;
   border-radius: 4px;
-  transition: .2s;
   font-size: 1rem;
   height: 2.22em;
   line-height: 1em;
@@ -174,14 +174,14 @@ button:active {
   box-shadow: 0 0 4px #c2c2c2 inset;
 }
 button.primary {
-  background-color: #618dc2;
+  background-color: #00aac2;
   color: #ffffff;
 }
 button.primary:hover {
-  background-color: #7098c8;
+  background-color: #00bcd6;
 }
 button.primary:active {
-  box-shadow: 0 0 4px #5282bc inset;
+  box-shadow: 0 0 4px #0098ae inset;
 }
 button.danger {
   background-color: #D00;
@@ -239,8 +239,8 @@ pagination > pagebar > button:only-child {
   border-radius: 4px;
 }
 pagination > pagebar > button.current {
-  border-color: #618dc2;
-  background: #618dc2;
+  border-color: #00aac2;
+  background: #00aac2;
 }
 /* layer */
 layer {
@@ -313,7 +313,7 @@ dialogue > header {
   padding: .72em 1em;
   font-size: 1.2rem;
   letter-spacing: .1em;
-  background-color: #618dc2;
+  background-color: #00aac2;
   border-radius: 4px 4px 0 0;
   color: #ffffff;
 }
@@ -341,16 +341,21 @@ layer > dialogue {
   display: flex;
 }
 /* Layout */
-linear {
+.linear {
   display: flex;
+  align-items: stretch;
 }
-linear.vertical {
+.linear.vertical {
   flex-direction: column;
 }
-linear.end {
-  justify-content: flex-end;
+.linear.center {
+  justify-content: center;
+  align-items: center;
 }
-linear > .stretch {
+.linear > :not(.stretch) {
+  flex-shrink: 0;
+}
+.linear > .stretch {
   flex-grow: 1;
   overflow: auto;
 }

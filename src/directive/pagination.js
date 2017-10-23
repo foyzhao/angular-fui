@@ -88,7 +88,7 @@
 		}
 
 		function validate() {
-			if (!options || current === undefined || current === null || total === undefined || total === null) {
+			if (!options || current === undefined || current === null || total === undefined || total === null || total === 0) {
 				return;
 			}
 			if (!angular.isNumber(current) || options.indexZero && current < 0 || !options.indexZero && current < 1) {

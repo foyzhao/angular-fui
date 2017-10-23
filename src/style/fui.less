@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-@primaryColor: #618dc2;
+@primaryColor: #00aac2;
 @borderRadius: 4px;
 @animateDuration: .4s;
 @space: " ";
@@ -19,6 +19,7 @@ h1, h2, h3, h4, h5, h6, p {
 	margin: 0;
 	padding: 0;
 	font-size: 1rem;
+	font-weight: normal;
 }
 ul, ol {
 	margin: 0;
@@ -29,7 +30,6 @@ ul, ol {
 .inlineElement() {
 	outline: none;
 	border-radius: @borderRadius;
-	transition: .2s;
 	font-size: 1rem;
 	height: 2.22em;
 	line-height: 1em;
@@ -45,6 +45,7 @@ input {
 	box-sizing: border-box;
 	padding: 0 .6em;
 	border: 1px solid #CCC;
+	transition: .2s border-color;
 
 	&:focus {
 		border-color: @primaryColor;
@@ -306,17 +307,19 @@ dialogue {
 }
 layer > dialogue { display: flex; }
 /* Layout */
-linear {
+.linear {
 	display: flex;
-
+	align-items: stretch;
 	&.vertical {
 		flex-direction: column;
 	}
-
-	&.end {
-		justify-content: flex-end;
+	&.center {
+		justify-content: center;
+		align-items: center;
 	}
-
+	> :not(.stretch) {
+		flex-shrink: 0;
+	}
 	> .stretch {
 		flex-grow: 1;
 		overflow: auto;
