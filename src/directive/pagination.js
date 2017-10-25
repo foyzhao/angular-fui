@@ -28,7 +28,8 @@
 		}
 	}
 
-	function paginationDirective() {
+	function paginationDirective($animate) {
+
 		// @formatter:off
 		var template =
 			'<span ng-transclude></span>' +
@@ -40,6 +41,7 @@
 					'ng-click="$ctrl.$pick(item)">{{item.text}}</button>' +
 			'</pagebar>';
 		// @formatter:on
+
 		return {
 			restrict: 'E',
 			scope: {
@@ -50,6 +52,9 @@
 			},
 			template: template,
 			transclude: true,
+			compile: function(element) {
+				$animate.enabled(element, false);
+			},
 			controller: PaginationController,
 			controllerAs: '$ctrl',
 			bindToController: true
@@ -298,6 +303,7 @@
 
 	}
 
+	paginationDirective.$inject = ['$animate'];
 	PaginationController.$inject = ['paginationConfig'];
 
 })();

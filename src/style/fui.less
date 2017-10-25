@@ -26,24 +26,31 @@ ul, ol {
 	padding: 0;
 	list-style: none;
 }
+a {
+	text-decoration: none;
+}
 /*element*/
-.inlineElement() {
+.inlineElement(@padding) {
+	box-sizing: border-box;
 	outline: none;
 	border-radius: @borderRadius;
 	font-size: 1rem;
-	height: 2.22em;
-	line-height: 1em;
-	&.small {
-		font-size: .88rem;
+	height: 2.5rem;
+	line-height: 1;
+	padding: 0 @padding;
+	&.small, .small & {
+		font-size: 1rem;
+		padding: 0 (@padding * 0.6);
+		height: 2rem;
 	}
-	&.big {
-		font-size: 1.24rem;
+	&.big, .big & {
+		font-size: 1.2rem;
+		padding: 0 (@padding * 1.5);
+		height: 3rem;
 	}
 }
 input {
-	.inlineElement();
-	box-sizing: border-box;
-	padding: 0 .6em;
+	.inlineElement(.6rem);
 	border: 1px solid #CCC;
 	transition: .2s border-color;
 
@@ -55,6 +62,49 @@ input {
 	&[type=radio] {
 		height: auto;
 	}
+}
+button {
+	@defaultColor: #CCC;
+	@dangerColor: #D00;
+	@disabledColor: #DDD;
+
+	.setColors(@color) {
+		background-color: @color;
+		color: contrast(@color);
+		&:hover {
+			background-color: lighten(@color, 4%);
+		}
+		&:active {
+			box-shadow: 0 0 4px darken(@color, 4%) inset;
+		}
+	}
+
+	.inlineElement(1.2rem);
+	.setColors(@defaultColor);
+	cursor: pointer;
+	border: none;
+	transition: background-color .2s;
+
+	&.primary {
+		.setColors(@primaryColor);
+	}
+
+	&.danger {
+		.setColors(@dangerColor);
+	}
+
+	&[disabled] {
+		.setColors(@disabledColor) !important;
+		cursor: default !important;
+		color: darken(@disabledColor, 16%) !important;
+		&:hover {
+			background-color: @disabledColor !important;
+		}
+		&:active {
+			box-shadow: none !important;
+		}
+	}
+
 }
 .checkable(@radius) {
 	display: inline-block;
@@ -118,52 +168,6 @@ checkbox {
 }
 radio {
 	.checkable(1rem);
-}
-button {
-	@defaultColor: #CCC;
-	@dangerColor: #D00;
-	@disabledColor: #DDD;
-
-	.setColors(@color) {
-		background-color: @color;
-		color: contrast(@color);
-		&:hover {
-			background-color: lighten(@color, 4%);
-		}
-		&:active {
-			box-shadow: 0 0 4px darken(@color, 4%) inset;
-		}
-	}
-
-	.inlineElement();
-	.setColors(@defaultColor);
-	box-sizing: border-box;
-	padding: 0 .8em;
-	cursor: pointer;
-	letter-spacing: .1em;
-	text-indent: .1em;
-	border: none;
-
-	&.primary {
-		.setColors(@primaryColor);
-	}
-
-	&.danger {
-		.setColors(@dangerColor);
-	}
-
-	&[disabled] {
-		.setColors(@disabledColor) !important;
-		cursor: default !important;
-		color: darken(@disabledColor, 16%) !important;
-		&:hover {
-			background-color: @disabledColor !important;
-		}
-		&:active {
-			box-shadow: none !important;
-		}
-	}
-
 }
 /* pagination */
 pagination {
@@ -250,6 +254,8 @@ dialogue {
 	flex-direction: column;
 	display: none;
 
+	layer > & { display: flex; }
+
 	&.ng-enter, &.ng-leave {
 		transition: ease @animateDuration all;
 	}
@@ -288,8 +294,8 @@ dialogue {
 
 		&.message {
 			padding: 2em;
-			min-width: 240px;
-			max-width: 400px;
+			min-width: 320px;
+			max-width: 480px;
 		}
 	}
 
@@ -305,7 +311,6 @@ dialogue {
 		}
 	}
 }
-layer > dialogue { display: flex; }
 /* Layout */
 .linear {
 	display: flex;

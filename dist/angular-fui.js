@@ -158,7 +158,7 @@ angular.module("fui", []);
             angular.extend(options, opt);
         };
     }
-    function paginationDirective() {
+    function paginationDirective($animate) {
         var template = "<span ng-transclude></span>" + "<pagebar>" + "<button " + 'ng-repeat="item in $ctrl.$items" ' + 'ng-class="item.type" ' + 'ng-disabled="item.disabled" ' + 'ng-click="$ctrl.$pick(item)">{{item.text}}</button>' + "</pagebar>";
         return {
             restrict: "E",
@@ -170,6 +170,9 @@ angular.module("fui", []);
             },
             template: template,
             transclude: true,
+            compile: function(element) {
+                $animate.enabled(element, false);
+            },
             controller: PaginationController,
             controllerAs: "$ctrl",
             bindToController: true
@@ -420,6 +423,7 @@ angular.module("fui", []);
             };
         }
     }
+    paginationDirective.$inject = [ "$animate" ];
     PaginationController.$inject = [ "paginationConfig" ];
 })();
 

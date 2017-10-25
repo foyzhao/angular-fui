@@ -27,23 +27,32 @@ ol {
   padding: 0;
   list-style: none;
 }
+a {
+  text-decoration: none;
+}
 /*element*/
 input {
+  box-sizing: border-box;
   outline: none;
   border-radius: 4px;
   font-size: 1rem;
-  height: 2.22em;
-  line-height: 1em;
-  box-sizing: border-box;
-  padding: 0 .6em;
+  height: 2.5rem;
+  line-height: 1;
+  padding: 0 0.6rem;
   border: 1px solid #CCC;
   transition: 0.2s border-color;
 }
-input.small {
-  font-size: .88rem;
+input.small,
+.small input {
+  font-size: 1rem;
+  padding: 0 0.36rem;
+  height: 2rem;
 }
-input.big {
-  font-size: 1.24rem;
+input.big,
+.big input {
+  font-size: 1.2rem;
+  padding: 0 0.9rem;
+  height: 3rem;
 }
 input:focus {
   border-color: #00aac2;
@@ -51,6 +60,76 @@ input:focus {
 input[type=checkbox],
 input[type=radio] {
   height: auto;
+}
+button {
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  height: 2.5rem;
+  line-height: 1;
+  padding: 0 1.2rem;
+  background-color: #CCC;
+  color: #000000;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+button.small,
+.small button {
+  font-size: 1rem;
+  padding: 0 0.72rem;
+  height: 2rem;
+}
+button.big,
+.big button {
+  font-size: 1.2rem;
+  padding: 0 1.8rem;
+  height: 3rem;
+}
+button:hover {
+  background-color: #d6d6d6;
+}
+button:active {
+  box-shadow: 0 0 4px #c2c2c2 inset;
+}
+button.primary {
+  background-color: #00aac2;
+  color: #ffffff;
+}
+button.primary:hover {
+  background-color: #00bcd6;
+}
+button.primary:active {
+  box-shadow: 0 0 4px #0098ae inset;
+}
+button.danger {
+  background-color: #D00;
+  color: #ffffff;
+}
+button.danger:hover {
+  background-color: #f10000;
+}
+button.danger:active {
+  box-shadow: 0 0 4px #c90000 inset;
+}
+button[disabled] {
+  background-color: #DDD !important;
+  color: #000000 !important;
+  cursor: default !important;
+  color: #b4b4b4 !important;
+}
+button[disabled]:hover {
+  background-color: #e7e7e7 !important;
+}
+button[disabled]:active {
+  box-shadow: 0 0 4px #d3d3d3 inset !important;
+}
+button[disabled]:hover {
+  background-color: #DDD !important;
+}
+button[disabled]:active {
+  box-shadow: none !important;
 }
 checkbox {
   display: inline-block;
@@ -146,71 +225,6 @@ radio:not(:empty):before {
 radio + radio {
   margin-left: .8em;
 }
-button {
-  outline: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  height: 2.22em;
-  line-height: 1em;
-  background-color: #CCC;
-  color: #000000;
-  box-sizing: border-box;
-  padding: 0 .8em;
-  cursor: pointer;
-  letter-spacing: .1em;
-  text-indent: .1em;
-  border: none;
-}
-button.small {
-  font-size: .88rem;
-}
-button.big {
-  font-size: 1.24rem;
-}
-button:hover {
-  background-color: #d6d6d6;
-}
-button:active {
-  box-shadow: 0 0 4px #c2c2c2 inset;
-}
-button.primary {
-  background-color: #00aac2;
-  color: #ffffff;
-}
-button.primary:hover {
-  background-color: #00bcd6;
-}
-button.primary:active {
-  box-shadow: 0 0 4px #0098ae inset;
-}
-button.danger {
-  background-color: #D00;
-  color: #ffffff;
-}
-button.danger:hover {
-  background-color: #f10000;
-}
-button.danger:active {
-  box-shadow: 0 0 4px #c90000 inset;
-}
-button[disabled] {
-  background-color: #DDD !important;
-  color: #000000 !important;
-  cursor: default !important;
-  color: #b4b4b4 !important;
-}
-button[disabled]:hover {
-  background-color: #e7e7e7 !important;
-}
-button[disabled]:active {
-  box-shadow: 0 0 4px #d3d3d3 inset !important;
-}
-button[disabled]:hover {
-  background-color: #DDD !important;
-}
-button[disabled]:active {
-  box-shadow: none !important;
-}
 /* pagination */
 pagination {
   display: block;
@@ -289,6 +303,9 @@ dialogue {
   flex-direction: column;
   display: none;
 }
+layer > dialogue {
+  display: flex;
+}
 dialogue.ng-enter,
 dialogue.ng-leave {
   transition: ease 0.4s all;
@@ -324,8 +341,8 @@ dialogue > .content {
 }
 dialogue > .content.message {
   padding: 2em;
-  min-width: 240px;
-  max-width: 400px;
+  min-width: 320px;
+  max-width: 480px;
 }
 dialogue > footer {
   display: flex;
@@ -336,9 +353,6 @@ dialogue > footer {
 }
 dialogue > footer > button {
   margin-left: .4em;
-}
-layer > dialogue {
-  display: flex;
 }
 /* Layout */
 .linear {
