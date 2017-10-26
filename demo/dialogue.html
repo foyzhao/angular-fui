@@ -6,7 +6,7 @@
 	<title>FUI - Dialogue</title>
 	<link rel="stylesheet" href="../dist/angular-fui.css">
 	<style>
-		body > header { position: fixed; z-index: 2000; background: #FFF; padding: 4px; margin: 4px; }
+		body > header { position: fixed; top: 0; z-index: 2000; background: #FFF; padding: 4px; margin: 4px; }
 	</style>
 </head>
 
@@ -21,7 +21,7 @@
 		<button ng-click="ctrl.customDialogue()">打开自定义框</button>
 	</header>
 
-	<dialogue ng-open="ctrl.isOpen1" style="width:600px;height:400px">
+	<dialogue ng-open="ctrl.isOpen1" style="width:600px;height:400px;">
 		<header>弹窗1标题</header>
 		<div class="content">
 			<p>定义了宽度600px，高度400px，所在SCOPE的ID为:{{$id}}</p>
@@ -44,6 +44,8 @@
 	<dialogue ng-open="ctrl.isOpen2">
 		<div class="content">
 			<p>没有标题的弹窗2，所在SCOPE的ID为:{{$id}}</p>
+			<p><input type="checkbox" ng-model="more">显示更多内容</p>
+			<p ng-if="more">更多内容<br>更多内容<br>更多内容<br>更多内容</p>
 		</div>
 		<footer>
 			<button ng-click="ctrl.isOpen2=false">关闭</button>
@@ -72,8 +74,6 @@
 					.confirm('这是一个确认弹窗，是否弹出警示框?')
 					.then(function() {
 						dialogue.alert('这是一个警示框');
-					}, function() {
-
 					});
 			};
 			this.customDialogue = function() {

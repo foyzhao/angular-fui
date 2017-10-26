@@ -10,8 +10,8 @@
 		};
 	}
 
-	function DialogueController($compile, $element, $attrs, $transclude, $animate) {
-		var $layer, $dialogue, transcludeScope;
+	function DialogueController($element, $attrs, $transclude, $animate) {
+		var $dialogue, transcludeScope;
 
 		this.$onInit = init;
 		this.$open = open;
@@ -19,7 +19,6 @@
 		this.$onDestroy = destroy;
 
 		function init() {
-			$element.appendTo(document.body);
 			$attrs.$observe('open', function(isOpen) {
 				if (isOpen !== undefined && isOpen !== false) {
 					open();
@@ -30,25 +29,30 @@
 		}
 
 		function open() {
-			if (!$layer) {
-				if (!$element.is(':last-child')) {
-					$element.appendTo(document.body)
-				}
+			if (!$dialogue) {
+				$element.appendTo(document.body);
 				$transclude(function(clone, scope) {
+					var $wrapper = $('<dialogue-wrapper/>').insertAfter($element);
+					$element.prevAll('dialogue-wrapper').removeClass('dimmer');
+					$animate.addClass($wrapper, 'dimmer');
 					$dialogue = clone;
-					$layer = $compile('<layer ng-animate-children/>')(scope);
-					$animate.enter($layer, null, $element);
-					$animate.enter($dialogue, $layer);
+					$animate.enter($dialogue, $wrapper);
 					transcludeScope = scope;
 				});
 			}
 		}
 
 		function close() {
-			if ($layer) {
-				$animate.leave($layer);
-				$animate.leave($dialogue);
-				$layer = null;
+			if ($dialogue) {
+				var $wrapper = $dialogue.parent();
+				if ($wrapper.hasClass('dimmer')) {
+					$element.prev().addClass('dimmer');
+					$animate.removeClass($wrapper, 'dimmer');
+				}
+				$animate.leave($dialogue).then(function() {
+					$wrapper.remove();
+					$wrapper = null;
+				});
 				$dialogue = null;
 				transcludeScope.$destroy();
 				transcludeScope = null;
@@ -61,6 +65,6 @@
 		}
 	}
 
-	DialogueController.$inject = ['$compile', '$element', '$attrs', '$transclude', '$animate'];
+	DialogueController.$inject = ['$element', '$attrs', '$transclude', '$animate'];
 
 })();
