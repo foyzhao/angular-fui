@@ -333,6 +333,24 @@ dialogue-wrapper > dialogue > footer {
 dialogue-wrapper > dialogue > footer > button {
   margin-left: 6px;
 }
+/* Prompt */
+prompt {
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin: auto;
+  bottom: 12%;
+  z-index: 9999;
+  background: #222;
+  color: #FFF;
+  padding: 8px 16px;
+  border-radius: 4px;
+  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s ease;
+}
+prompt.spin {
+  transform: rotateY(90deg);
+}
 /* Layout */
 .linear {
   display: flex;

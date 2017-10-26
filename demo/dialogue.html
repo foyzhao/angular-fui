@@ -19,6 +19,8 @@
 		<checkbox ng-model="ctrl.isOpen3">弹窗3</checkbox>
 		<button ng-click="ctrl.confirm()">打开确认框</button>
 		<button ng-click="ctrl.customDialogue()">打开自定义框</button>
+		<button ng-click="ctrl.prompt()">prompt</button>
+		<button ng-click="ctrl.promptRandom()">prompt random</button>
 	</header>
 
 	<dialogue ng-open="ctrl.isOpen1" style="width:600px;height:400px;">
@@ -68,7 +70,7 @@
 	<script src="../lib/angular-animate.js"></script>
 	<script src="../dist/angular-fui.js"></script>
 	<script>
-		angular.module('demoApp', ['ngAnimate', 'fui']).controller('Ctrl', function(dialogue) {
+		angular.module('demoApp', ['ngAnimate', 'fui']).controller('Ctrl', function(dialogue, prompt) {
 			this.confirm = function() {
 				dialogue
 					.confirm('这是一个确认弹窗，是否弹出警示框?')
@@ -87,6 +89,16 @@
 							destroy();
 						}
 					}]
+				});
+			};
+			this.prompt = function() {
+				prompt('提示信息').then(function(msg) {
+					console.log(msg, new Date());
+				});
+			};
+			this.promptRandom = function() {
+				prompt('random:' + Math.random()).then(function(msg) {
+					console.log(msg, new Date());
 				});
 			};
 		});
