@@ -3,6 +3,8 @@
 html {
   box-sizing: border-box;
   font: normal 14px 'Microsoft YaHei UI', 'Microsoft YaHei UI Light', 'sans-serif';
+  color: #222;
+  background-color: #f1f1f1;
 }
 body {
   margin: 0;
@@ -34,7 +36,7 @@ a {
 input {
   box-sizing: border-box;
   outline: none;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 1rem;
   height: 2.5rem;
   line-height: 1;
@@ -64,7 +66,7 @@ input[type=radio] {
 button {
   box-sizing: border-box;
   outline: none;
-  border-radius: 4px;
+  border-radius: 2px;
   font-size: 1rem;
   height: 2.5rem;
   line-height: 1;
@@ -225,6 +227,43 @@ radio:not(:empty):before {
 radio + radio {
   margin-left: .8em;
 }
+/* paper */
+.paper {
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+/* table */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 1px;
+  background: #DDD;
+  border-radius: 2px;
+}
+table th {
+  padding: 4px;
+  background: #FFF;
+  height: 32px;
+}
+table td {
+  padding: 4px;
+  background: #FFF;
+  text-align: center;
+  height: 32px;
+}
+table thead > tr:first-child > :first-child {
+  border-radius: 2px 0 0 0;
+}
+table thead > tr:first-child > :last-child {
+  border-radius: 0 2px 0 0;
+}
+table tbody > tr:last-child > :first-child {
+  border-radius: 0 0 0 2px;
+}
+table tbody > tr:last-child > :last-child {
+  border-radius: 0 0 2px 0;
+}
 /* pagination */
 pagination {
   display: block;
@@ -244,17 +283,18 @@ pagination > pagebar > button {
   min-width: 48px;
 }
 pagination > pagebar > button:first-child {
-  border-radius: 4px 0 0 4px;
+  border-radius: 2px 0 0 2px;
 }
 pagination > pagebar > button:last-child {
-  border-radius: 0 4px 4px 0;
+  border-radius: 0 2px 2px 0;
 }
 pagination > pagebar > button:only-child {
-  border-radius: 4px;
+  border-radius: 2px;
 }
 pagination > pagebar > button.current {
   border-color: #00aac2;
   background: #00aac2;
+  color: #ffffff;
 }
 /* dialogue */
 dialogue {
@@ -274,24 +314,24 @@ dialogue-wrapper {
   transition: background-color 0.4s ease;
 }
 dialogue-wrapper.dimmer {
-  background-color: rgba(0, 0, 0, 0.64);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 dialogue-wrapper > dialogue {
+  background: #FFF;
+  border-radius: 2px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
   flex-direction: column;
   display: flex;
-  resize: both;
   overflow: hidden;
-  background-color: #FFF;
-  border-radius: 4px;
-  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.24);
 }
 dialogue-wrapper > dialogue.ng-enter,
 dialogue-wrapper > dialogue.ng-leave {
-  transition: all 0.4s ease;
+  transition: all 0.2s ease;
 }
 dialogue-wrapper > dialogue.ng-enter {
   opacity: 0;
-  transform: scale(0.8);
+  transform: scale(0.96);
 }
 dialogue-wrapper > dialogue.ng-enter.ng-enter-active {
   opacity: 1;
@@ -303,35 +343,32 @@ dialogue-wrapper > dialogue.ng-leave {
 }
 dialogue-wrapper > dialogue.ng-leave.ng-leave-active {
   opacity: 0;
-  transform: scale(0.6);
+  transform: scale(0.9);
 }
 dialogue-wrapper > dialogue > header {
-  padding: .72em 1em;
-  font-size: 1.2rem;
-  letter-spacing: 1px;
-  background-color: #00aac2;
-  color: #ffffff;
+  padding: 1rem 1rem;
+  font-size: 1.16rem;
+  color: #000;
   flex-shrink: 0;
 }
 dialogue-wrapper > dialogue > .content {
-  padding: 1em;
+  padding: 1rem;
   flex-grow: 1;
   overflow: auto;
 }
 dialogue-wrapper > dialogue > .content.message {
-  padding: 2em;
   min-width: 320px;
   max-width: 480px;
 }
 dialogue-wrapper > dialogue > footer {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  padding: 6px;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  padding: 1rem;
   flex-shrink: 0;
 }
 dialogue-wrapper > dialogue > footer > button {
-  margin-left: 6px;
+  margin-left: .5rem;
 }
 /* Prompt */
 prompt {
@@ -344,11 +381,12 @@ prompt {
   background: #222;
   color: #FFF;
   padding: 8px 16px;
-  border-radius: 4px;
-  box-shadow: 1px 3px 3px 0 rgba(0, 0, 0, 0.2), 1px 3px 15px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.24);
   transition: all 0.4s ease;
 }
 prompt.spin {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.04), 0 2px 2px rgba(0, 0, 0, 0.04);
   transform: rotateY(90deg);
 }
 /* Layout */

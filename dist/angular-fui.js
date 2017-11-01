@@ -224,6 +224,9 @@ angular.module("fui", []);
             if (options.indexZero && current >= total || !options.indexZero && current > total) {
                 throw Error("[pagination] Invalid current page '" + current + "' with total pages '" + total + "'");
             }
+            if (total === 1) {
+                return;
+            }
             if (!options.indexZero) {
                 current--;
             }
