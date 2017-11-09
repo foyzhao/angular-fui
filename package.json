@@ -9,10 +9,6 @@
 		"type": "git",
 		"url": "git://github.com/foyzhao/angular-fui.git"
 	},
-	"devDependencies": {
-		"jshint": "^2.9.5",
-		"uglify-js": "^2.4.11"
-	},
 	"scripts": {
 		"lint": "jshint src",
 		"build": "uglifyJs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular-fui.js"

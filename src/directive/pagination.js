@@ -25,7 +25,7 @@
 		};
 		this.$set = function(opt) {
 			angular.extend(options, opt);
-		}
+		};
 	}
 
 	function paginationDirective($animate) {
@@ -301,7 +301,7 @@
 					ellipsis: true,
 					previous: page < current
 				}
-			}
+			};
 		}
 
 	}

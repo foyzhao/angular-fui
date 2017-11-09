@@ -30,7 +30,7 @@
 							.text(msg)
 							.css({left: 0, right: 0, width: $prompt.width()});
 					}).then(function() {
-						$animate.removeClass($prompt, 'spin')
+						$animate.removeClass($prompt, 'spin');
 					});
 					$timeout(function() {
 						defer.resolve(msg);
