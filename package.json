@@ -11,10 +11,10 @@
 	},
 	"devDependencies": {
 		"jshint": "^2.9.5",
-		"uglifyjs": "^2.4.11"
+		"uglify-js": "^2.4.11"
 	},
 	"scripts": {
 		"lint": "jshint src",
-		"build": "uglifyjs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular-fui.js"
+		"build": "uglifyJs src/*.js src/filter/*.js src/directive/*.js src/service/*.js -b -o dist/angular-fui.js"
 	}
 }
