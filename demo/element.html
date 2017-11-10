@@ -64,13 +64,13 @@
 		<radio checked>文本选项</radio>
 		<radio checked disabled>文本选项</radio>
 	</p>
-	<p>
+	<p ng-model="ctrl.radioValue">
 		可以取消：
-		<radio ng-model="ctrl.radioValue" ng-repeat="item in ctrl.options" value="item">选项{{item}}</radio>
+		<radio ng-repeat="item in ctrl.options" value="item">选项{{item}}</radio>
 	</p>
-	<p>
+	<p ng-model="ctrl.radioValue">
 		不可取消：
-		<radio ng-model="ctrl.radioValue" ng-repeat="item in ctrl.options" value="item" required>选项{{item}}</radio>
+		<radio ng-repeat="item in ctrl.options" value="item" required>选项{{item}}</radio>
 	</p>
 
 	<script src="../lib/jquery.js"></script>

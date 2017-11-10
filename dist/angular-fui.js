@@ -439,7 +439,7 @@ angular.module("fui", []);
     function radioDirective() {
         return {
             restrict: "E",
-            require: "?ngModel",
+            require: "?^ngModel",
             link: {
                 pre: preLink
             }
@@ -449,32 +449,26 @@ angular.module("fui", []);
         var nodeValue;
         if (ctrl) {
             if (attrs.value !== undefined) {
-                if (attrs.value) {
-                    nodeValue = scope.$eval(attrs.value);
-                } else {
-                    nodeValue = element.text();
-                }
+                nodeValue = scope.$eval(attrs.value);
+            } else {
+                nodeValue = element.text();
             }
-            ctrl.$formatters.push(valueFormatter);
-            ctrl.$parsers.push(valueParser);
-            ctrl.$render = render;
+            scope.$watch(function() {
+                return ctrl.$viewValue;
+            }, function(value) {
+                attrs.$set("checked", value === nodeValue);
+            });
         }
-        element.on("click", listener);
-        function valueFormatter(value) {
-            return value === nodeValue;
-        }
-        function valueParser(value) {
-            return value ? nodeValue : null;
-        }
-        function render() {
-            attrs.$set("checked", ctrl.$viewValue);
-        }
-        function listener() {
+        element.on("click", clickListener);
+        function clickListener(e) {
             if (attrs.disabled === undefined || attrs.disabled === false) {
                 if (ctrl) {
-                    if (!ctrl.$viewValue || attrs.required === undefined || attrs.required === false) {
-                        ctrl.$setViewValue(!ctrl.$viewValue);
-                        ctrl.$render();
+                    if (attrs.checked) {
+                        if (attrs.required === undefined || attrs.required === false) {
+                            ctrl.$setViewValue(undefined, e);
+                        }
+                    } else {
+                        ctrl.$setViewValue(nodeValue, e);
                     }
                 } else {
                     if (attrs.checked === undefined || attrs.checked === false || attrs.required === undefined || attrs.required === false) {
