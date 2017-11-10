@@ -12,34 +12,34 @@
 		};
 	}
 
-	function preLink(scope, element, attrs, ctrl) {
+	function preLink(scope, element, attrs, ngModel) {
 
 		var nodeValue;
 
-		if (ctrl) {
+		if (ngModel) {
 			if (attrs.value !== undefined) {
 				nodeValue = scope.$eval(attrs.value);
 			} else {
 				nodeValue = element.text();
 			}
 			scope.$watch(function() {
-				return ctrl.$viewValue;
+				return ngModel.$viewValue;
 			}, function(value) {
 				attrs.$set('checked', value === nodeValue);
-			})
+			});
 		}
 
 		element.on('click', clickListener);
 
 		function clickListener(e) {
 			if (attrs.disabled === undefined || attrs.disabled === false) {
-				if (ctrl) {
+				if (ngModel) {
 					if (attrs.checked) {
 						if (attrs.required === undefined || attrs.required === false) {
-							ctrl.$setViewValue(undefined, e);
+							ngModel.$setViewValue(undefined, e);
 						}
 					} else {
-						ctrl.$setViewValue(nodeValue, e);
+						ngModel.$setViewValue(nodeValue, e);
 					}
 				} else {
 					if (attrs.checked === undefined || attrs.checked === false || attrs.required === undefined || attrs.required === false) {
