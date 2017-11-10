@@ -44,18 +44,18 @@
 
 	function arrayModelLink(scope, element, attrs, ngModel) {
 
-		var nodeValue;
+		var value;
 
 		if (attrs.value !== undefined) {
-			nodeValue = scope.$eval(attrs.value);
+			value = scope.$eval(attrs.value);
 		} else {
-			nodeValue = element.text();
+			value = element.text();
 		}
 
 		scope.$watchCollection(function() {
 			return ngModel.$viewValue;
 		}, function(value) {
-			attrs.$set('checked', value && angular.isArray(value) && value.indexOf(nodeValue) >= 0);
+			attrs.$set('checked', value && angular.isArray(value) && value.indexOf(value) >= 0);
 		});
 
 		element.on('click', clickListener);
@@ -63,19 +63,19 @@
 		function clickListener(e) {
 			if (attrs.disabled === undefined || attrs.disabled === false) {
 				if (ngModel) {
-					var value = [];
+					var values = [];
 					if (ngModel.$viewValue && angular.isArray(ngModel.$viewValue)) {
-						value = value.concat(ngModel.$viewValue);
+						values = values.concat(ngModel.$viewValue);
 					}
 					if (attrs.checked) {
-						var index = value.indexOf(nodeValue);
+						var index = values.indexOf(value);
 						if (index >= 0) {
-							value.splice(index, 1);
+							values.splice(index, 1);
 						}
 					} else {
-						value.push(nodeValue);
+						values.push(value);
 					}
-					ngModel.$setViewValue(value, e);
+					ngModel.$setViewValue(values, e);
 				} else {
 					attrs.$set('checked', attrs.checked === undefined || attrs.checked === false);
 				}

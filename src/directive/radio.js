@@ -14,18 +14,18 @@
 
 	function preLink(scope, element, attrs, ngModel) {
 
-		var nodeValue;
+		var value;
 
 		if (ngModel) {
 			if (attrs.value !== undefined) {
-				nodeValue = scope.$eval(attrs.value);
+				value = scope.$eval(attrs.value);
 			} else {
-				nodeValue = element.text();
+				value = element.text();
 			}
 			scope.$watch(function() {
 				return ngModel.$viewValue;
-			}, function(value) {
-				attrs.$set('checked', value === nodeValue);
+			}, function(newValue) {
+				attrs.$set('checked', newValue === value);
 			});
 		}
 
@@ -39,7 +39,7 @@
 							ngModel.$setViewValue(undefined, e);
 						}
 					} else {
-						ngModel.$setViewValue(nodeValue, e);
+						ngModel.$setViewValue(value, e);
 					}
 				} else {
 					if (attrs.checked === undefined || attrs.checked === false || attrs.required === undefined || attrs.required === false) {
