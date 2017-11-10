@@ -202,17 +202,18 @@ radio-group {
 		flex-basis: 0;
 		flex-grow: 1;
 		background-color: #DDD;
+		border: 1px solid #DDD;
 		color: #444;
 		transition: .2s;
 		&:before {
 			content: none !important;
 		}
 		&:not([disabled]):hover {
-			background-color: #CCC;
+			background-color: #EEE;
 		}
 		&[checked] {
-			color: #000;
-			background-color: #BBB !important;
+			color: @primaryColor;
+			background-color: #FFF !important;
 		}
 		&:first-child {
 			border-radius: @borderRadius 0 0 @borderRadius;
@@ -222,7 +223,8 @@ radio-group {
 		}
 	}
 	> radio + radio {
-		margin-left: 1px;
+		margin-left: -1px;
+		border-left-color: #CCC;
 	}
 }
 /* paper */
