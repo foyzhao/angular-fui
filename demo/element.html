@@ -19,6 +19,10 @@
 		<button class="small primary">确定</button>
 		<button class="small danger">删除</button>
 		<button class="small" disabled>禁用</button>
+		<radio-group class="small">
+			<radio>文本选项</radio>
+			<radio>文本选项</radio>
+		</radio-group>
 		<radio class="small">文本选项</radio>
 		<checkbox class="small">文本选项</checkbox>
 	</p>
@@ -29,6 +33,10 @@
 		<button class="primary">确定</button>
 		<button class="danger">删除</button>
 		<button disabled>禁用</button>
+		<radio-group>
+			<radio>文本选项</radio>
+			<radio>文本选项</radio>
+		</radio-group>
 		<radio>文本选项</radio>
 		<checkbox>文本选项</checkbox>
 	</p>
@@ -39,6 +47,10 @@
 		<button class="big primary">确定</button>
 		<button class="big danger">删除</button>
 		<button class="big" disabled>禁用</button>
+		<radio-group class="big">
+			<radio>文本选项</radio>
+			<radio>文本选项</radio>
+		</radio-group>
 		<radio class="big">文本选项</radio>
 		<checkbox class="big">文本选项</checkbox>
 	</p>
@@ -71,6 +83,14 @@
 	<p ng-model="ctrl.radioValue">
 		不可取消：
 		<radio ng-repeat="item in ctrl.options" value="item" required>选项{{item}}</radio>
+	</p>
+	<p>条状单选：
+		<radio-group ng-model="ctrl.group">
+			<radio>选项1</radio>
+			<radio>选项2</radio>
+			<radio>选项3</radio>
+			<radio>选项4</radio>
+		</radio-group>
 	</p>
 
 	<script src="../lib/jquery.js"></script>

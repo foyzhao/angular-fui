@@ -32,31 +32,37 @@ a {
 	text-decoration: none;
 }
 /*element*/
-.inlineElement(@padding) {
+.inlineElement() {
 	box-sizing: border-box;
 	outline: none;
 	border-radius: @borderRadius;
-	font-size: 1rem;
-	height: 2.5rem;
-	line-height: 2.5rem;
-	padding: 0 @padding;
+	display: inline-block;
+	line-height: 0;
 	&.small, .small & {
-		font-size: 1rem;
-		padding: 0 (@padding * 0.6);
 		height: 2rem;
-		line-height: 2rem;
 	}
+	font-size: 1rem;
+	height: 2.4rem;
 	&.big, .big & {
 		font-size: 1.2rem;
-		padding: 0 (@padding * 1.5);
 		height: 3rem;
-		line-height: 2.2em;
 	}
 }
 input {
-	.inlineElement(.6rem);
+	.inlineElement();
 	border: 1px solid #CCC;
 	transition: .2s border-color;
+
+	&.small, .small & {
+		width: 160px;
+		padding: 0 .4em;
+	}
+	width: 180px;
+	padding: 0 .6em;
+	&.big, .big & {
+		width: 200px;
+		padding: 0 .8em;
+	}
 
 	&:focus {
 		border-color: @primaryColor;
@@ -83,11 +89,19 @@ button {
 		}
 	}
 
-	.inlineElement(1.2rem);
+	.inlineElement();
 	.setColors(@defaultColor);
 	cursor: pointer;
-	border: none;
+	border: 1px solid transparent;
 	transition: background-color .2s;
+
+	&.small, .small & {
+		padding: 0 .6em;
+	}
+	padding: 0 1em;
+	&.big, .big & {
+		padding: 0 1.2em;
+	}
 
 	&.primary {
 		.setColors(@primaryColor);
@@ -111,9 +125,18 @@ button {
 
 }
 .checkable(@radius) {
-	.inlineElement(0);
-	display: inline-block;
+	.inlineElement();
 	cursor: pointer;
+	border: 1px solid transparent;
+	border-radius: 0;
+
+	&.small, .small & {
+		line-height: 1.9rem;
+	}
+	line-height: 2.4rem;
+	&.big, .big & {
+		line-height: 2.7rem;
+	}
 
 	&:before {
 		content: @space;
@@ -122,7 +145,7 @@ button {
 		display: inline-block;
 		width: 1em;
 		height: 1em;
-		line-height: 1em;
+		line-height: 1;
 		background-color: #FFF;
 		border: 1px solid @primaryColor;
 		border-radius: @radius;
@@ -160,11 +183,11 @@ button {
 	}
 
 	&:not(:empty):before {
-		margin-right: .4em;
+		margin-right: .2em;
 	}
 
 	& + & {
-		margin-left: .8em;
+		margin-left: .5em;
 	}
 }
 checkbox {
@@ -172,6 +195,35 @@ checkbox {
 }
 radio {
 	.checkable(1rem);
+}
+radio-group {
+	display: inline-flex;
+	> radio {
+		border: 1px solid #CCC;
+		text-align: center;
+		padding: 0 .8em;
+		flex-grow: 1;
+		&:before {
+			content: none !important;
+		}
+		&[checked] {
+			color: #FFF;
+			border-color: @primaryColor;
+			background-color: @primaryColor;
+		}
+		&[checked] + radio {
+			border-left-color: transparent;
+		}
+		&:first-child {
+			border-radius: @borderRadius 0 0 @borderRadius;
+		}
+		&:last-child {
+			border-radius: 0 @borderRadius @borderRadius 0;
+		}
+	}
+	> radio + radio {
+		margin-left: -1px;
+	}
 }
 /* paper */
 .paper {

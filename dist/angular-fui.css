@@ -37,26 +37,33 @@ input {
   box-sizing: border-box;
   outline: none;
   border-radius: 2px;
+  display: inline-block;
+  line-height: 0;
   font-size: 1rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 0.6rem;
+  height: 2.4rem;
   border: 1px solid #CCC;
   transition: 0.2s border-color;
+  width: 180px;
+  padding: 0 .6em;
 }
 input.small,
 .small input {
-  font-size: 1rem;
-  padding: 0 0.36rem;
   height: 2rem;
-  line-height: 2rem;
 }
 input.big,
 .big input {
   font-size: 1.2rem;
-  padding: 0 0.9rem;
   height: 3rem;
-  line-height: 2.2em;
+}
+input.small,
+.small input {
+  width: 160px;
+  padding: 0 .4em;
+}
+input.big,
+.big input {
+  width: 200px;
+  padding: 0 .8em;
 }
 input:focus {
   border-color: #00aac2;
@@ -69,35 +76,39 @@ button {
   box-sizing: border-box;
   outline: none;
   border-radius: 2px;
+  display: inline-block;
+  line-height: 0;
   font-size: 1rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 1.2rem;
+  height: 2.4rem;
   background-color: #CCC;
   color: #000000;
   cursor: pointer;
-  border: none;
+  border: 1px solid transparent;
   transition: background-color 0.2s;
+  padding: 0 1em;
 }
 button.small,
 .small button {
-  font-size: 1rem;
-  padding: 0 0.72rem;
   height: 2rem;
-  line-height: 2rem;
 }
 button.big,
 .big button {
   font-size: 1.2rem;
-  padding: 0 1.8rem;
   height: 3rem;
-  line-height: 2.2em;
 }
 button:hover {
   background-color: #d6d6d6;
 }
 button:active {
   box-shadow: 0 0 4px #c2c2c2 inset;
+}
+button.small,
+.small button {
+  padding: 0 .6em;
+}
+button.big,
+.big button {
+  padding: 0 1.2em;
 }
 button.primary {
   background-color: #00aac2;
@@ -141,26 +152,31 @@ checkbox {
   box-sizing: border-box;
   outline: none;
   border-radius: 2px;
-  font-size: 1rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 0;
   display: inline-block;
+  line-height: 0;
+  font-size: 1rem;
+  height: 2.4rem;
   cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 0;
+  line-height: 2.4rem;
 }
 checkbox.small,
 .small checkbox {
-  font-size: 1rem;
-  padding: 0 0;
   height: 2rem;
-  line-height: 2rem;
 }
 checkbox.big,
 .big checkbox {
   font-size: 1.2rem;
-  padding: 0 0;
   height: 3rem;
-  line-height: 2.2em;
+}
+checkbox.small,
+.small checkbox {
+  line-height: 1.9rem;
+}
+checkbox.big,
+.big checkbox {
+  line-height: 2.7rem;
 }
 checkbox:before {
   content: " ";
@@ -169,7 +185,7 @@ checkbox:before {
   display: inline-block;
   width: 1em;
   height: 1em;
-  line-height: 1em;
+  line-height: 1;
   background-color: #FFF;
   border: 1px solid #00aac2;
   border-radius: 2px;
@@ -199,35 +215,40 @@ checkbox[disabled][checked]:before {
   background-color: #DDD;
 }
 checkbox:not(:empty):before {
-  margin-right: .4em;
+  margin-right: .2em;
 }
 checkbox + checkbox {
-  margin-left: .8em;
+  margin-left: .5em;
 }
 radio {
   box-sizing: border-box;
   outline: none;
   border-radius: 2px;
-  font-size: 1rem;
-  height: 2.5rem;
-  line-height: 2.5rem;
-  padding: 0 0;
   display: inline-block;
+  line-height: 0;
+  font-size: 1rem;
+  height: 2.4rem;
   cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: 0;
+  line-height: 2.4rem;
 }
 radio.small,
 .small radio {
-  font-size: 1rem;
-  padding: 0 0;
   height: 2rem;
-  line-height: 2rem;
 }
 radio.big,
 .big radio {
   font-size: 1.2rem;
-  padding: 0 0;
   height: 3rem;
-  line-height: 2.2em;
+}
+radio.small,
+.small radio {
+  line-height: 1.9rem;
+}
+radio.big,
+.big radio {
+  line-height: 2.7rem;
 }
 radio:before {
   content: " ";
@@ -236,7 +257,7 @@ radio:before {
   display: inline-block;
   width: 1em;
   height: 1em;
-  line-height: 1em;
+  line-height: 1;
   background-color: #FFF;
   border: 1px solid #00aac2;
   border-radius: 1rem;
@@ -266,10 +287,39 @@ radio[disabled][checked]:before {
   background-color: #DDD;
 }
 radio:not(:empty):before {
-  margin-right: .4em;
+  margin-right: .2em;
 }
 radio + radio {
-  margin-left: .8em;
+  margin-left: .5em;
+}
+radio-group {
+  display: inline-flex;
+}
+radio-group > radio {
+  border: 1px solid #CCC;
+  text-align: center;
+  padding: 0 .8em;
+  flex-grow: 1;
+}
+radio-group > radio:before {
+  content: none !important;
+}
+radio-group > radio[checked] {
+  color: #FFF;
+  border-color: #00aac2;
+  background-color: #00aac2;
+}
+radio-group > radio[checked] + radio {
+  border-left-color: transparent;
+}
+radio-group > radio:first-child {
+  border-radius: 2px 0 0 2px;
+}
+radio-group > radio:last-child {
+  border-radius: 0 2px 2px 0;
+}
+radio-group > radio + radio {
+  margin-left: -1px;
 }
 /* paper */
 .paper {
