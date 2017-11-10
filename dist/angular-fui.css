@@ -43,7 +43,6 @@ input {
   height: 2.4rem;
   border: 1px solid #CCC;
   transition: 0.2s border-color;
-  width: 180px;
   padding: 0 .6em;
 }
 input.small,
@@ -57,12 +56,10 @@ input.big,
 }
 input.small,
 .small input {
-  width: 160px;
   padding: 0 .4em;
 }
 input.big,
 .big input {
-  width: 200px;
   padding: 0 .8em;
 }
 input:focus {
@@ -202,7 +199,7 @@ checkbox[checked]:before {
   background-color: #00aac2;
 }
 checkbox[disabled] {
-  color: #b4b4b4;
+  color: #b4b4b4 !important;
   cursor: default;
 }
 checkbox[disabled]:before {
@@ -274,7 +271,7 @@ radio[checked]:before {
   background-color: #00aac2;
 }
 radio[disabled] {
-  color: #b4b4b4;
+  color: #b4b4b4 !important;
   cursor: default;
 }
 radio[disabled]:before {
@@ -296,21 +293,23 @@ radio-group {
   display: inline-flex;
 }
 radio-group > radio {
-  border: 1px solid #CCC;
   text-align: center;
   padding: 0 .8em;
+  flex-basis: 0;
   flex-grow: 1;
+  background-color: #DDD;
+  color: #444;
+  transition: .2s;
 }
 radio-group > radio:before {
   content: none !important;
 }
-radio-group > radio[checked] {
-  color: #FFF;
-  border-color: #00aac2;
-  background-color: #00aac2;
+radio-group > radio:not([disabled]):hover {
+  background-color: #CCC;
 }
-radio-group > radio[checked] + radio {
-  border-left-color: transparent;
+radio-group > radio[checked] {
+  color: #000;
+  background-color: #BBB !important;
 }
 radio-group > radio:first-child {
   border-radius: 2px 0 0 2px;
@@ -319,7 +318,7 @@ radio-group > radio:last-child {
   border-radius: 0 2px 2px 0;
 }
 radio-group > radio + radio {
-  margin-left: -1px;
+  margin-left: 1px;
 }
 /* paper */
 .paper {
