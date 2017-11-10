@@ -15,59 +15,67 @@ angular.module("fui", []);
     function checkboxDirective() {
         return {
             restrict: "E",
-            require: "?ngModel",
+            require: "?^ngModel",
             link: {
                 pre: preLink
             }
         };
     }
-    function preLink(scope, element, attrs, ctrl) {
-        var modelValue, nodeValue;
-        if (ctrl) {
-            if (attrs.value === undefined) {
-                ctrl.$formatters.push(boolValueFormatter);
-            } else {
-                ctrl.$formatters.push(arrayValueFormatter);
-                ctrl.$parsers.push(arrayValueParser);
-                if (attrs.value) {
-                    nodeValue = scope.$eval(attrs.value);
-                } else {
-                    nodeValue = element.text();
-                }
-            }
-            ctrl.$render = render;
+    function preLink(scope, element, attrs, ngModel) {
+        if (!ngModel || ngModel.$$element === element) {
+            boolModelLink(scope, element, attrs, ngModel);
+        } else {
+            arrayModelLink(scope, element, attrs, ngModel);
         }
-        element.on("click", listener);
-        function boolValueFormatter(value) {
-            return !!value;
+    }
+    function boolModelLink(scope, element, attrs, ngModel) {
+        if (ngModel) {
+            scope.$watch(function() {
+                return ngModel.$viewValue;
+            }, function(value) {
+                attrs.$set("checked", !!value);
+            });
         }
-        function arrayValueFormatter(value) {
-            modelValue = value;
-            return angular.isArray(modelValue) && modelValue.indexOf(nodeValue) >= 0;
-        }
-        function arrayValueParser(value) {
-            if (value) {
-                if (angular.isArray(modelValue)) {
-                    modelValue.push(nodeValue);
-                } else {
-                    modelValue = [ nodeValue ];
-                }
-            } else if (angular.isArray(modelValue)) {
-                var index = modelValue.indexOf(nodeValue);
-                if (index >= 0) {
-                    modelValue.splice(index, 1);
-                }
-            }
-            return modelValue;
-        }
-        function render() {
-            attrs.$set("checked", ctrl.$viewValue);
-        }
-        function listener() {
+        element.on("click", clickListener);
+        function clickListener(e) {
             if (attrs.disabled === undefined || attrs.disabled === false) {
-                if (ctrl) {
-                    ctrl.$setViewValue(!ctrl.$viewValue);
-                    ctrl.$render();
+                if (ngModel) {
+                    ngModel.$setViewValue(!ngModel.$viewValue, e);
+                } else {
+                    attrs.$set("checked", attrs.checked === undefined || attrs.checked === false);
+                }
+            }
+        }
+    }
+    function arrayModelLink(scope, element, attrs, ngModel) {
+        var nodeValue;
+        if (attrs.value !== undefined) {
+            nodeValue = scope.$eval(attrs.value);
+        } else {
+            nodeValue = element.text();
+        }
+        scope.$watchCollection(function() {
+            return ngModel.$viewValue;
+        }, function(value) {
+            attrs.$set("checked", value && angular.isArray(value) && value.indexOf(nodeValue) >= 0);
+        });
+        element.on("click", clickListener);
+        function clickListener(e) {
+            if (attrs.disabled === undefined || attrs.disabled === false) {
+                if (ngModel) {
+                    var value = [];
+                    if (ngModel.$viewValue && angular.isArray(ngModel.$viewValue)) {
+                        value = value.concat(ngModel.$viewValue);
+                    }
+                    if (attrs.checked) {
+                        var index = value.indexOf(nodeValue);
+                        if (index >= 0) {
+                            value.splice(index, 1);
+                        }
+                    } else {
+                        value.push(nodeValue);
+                    }
+                    ngModel.$setViewValue(value, e);
                 } else {
                     attrs.$set("checked", attrs.checked === undefined || attrs.checked === false);
                 }
@@ -445,16 +453,16 @@ angular.module("fui", []);
             }
         };
     }
-    function preLink(scope, element, attrs, ctrl) {
+    function preLink(scope, element, attrs, ngModel) {
         var nodeValue;
-        if (ctrl) {
+        if (ngModel) {
             if (attrs.value !== undefined) {
                 nodeValue = scope.$eval(attrs.value);
             } else {
                 nodeValue = element.text();
             }
             scope.$watch(function() {
-                return ctrl.$viewValue;
+                return ngModel.$viewValue;
             }, function(value) {
                 attrs.$set("checked", value === nodeValue);
             });
@@ -462,13 +470,13 @@ angular.module("fui", []);
         element.on("click", clickListener);
         function clickListener(e) {
             if (attrs.disabled === undefined || attrs.disabled === false) {
-                if (ctrl) {
+                if (ngModel) {
                     if (attrs.checked) {
                         if (attrs.required === undefined || attrs.required === false) {
-                            ctrl.$setViewValue(undefined, e);
+                            ngModel.$setViewValue(undefined, e);
                         }
                     } else {
-                        ctrl.$setViewValue(nodeValue, e);
+                        ngModel.$setViewValue(nodeValue, e);
                     }
                 } else {
                     if (attrs.checked === undefined || attrs.checked === false || attrs.required === undefined || attrs.required === false) {
