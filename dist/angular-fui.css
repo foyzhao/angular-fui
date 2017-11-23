@@ -156,6 +156,7 @@ checkbox {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 0;
+  white-space: nowrap;
   line-height: 2.4rem;
 }
 checkbox.small,
@@ -228,6 +229,7 @@ radio {
   cursor: pointer;
   border: 1px solid transparent;
   border-radius: 0;
+  white-space: nowrap;
   line-height: 2.4rem;
 }
 radio.small,
