@@ -46,17 +46,25 @@
 
 		var value;
 
-		if (attrs.value !== undefined) {
-			value = scope.$eval(attrs.value);
+		if (attrs.ngValue !== undefined) {
+			attrs.$observe('value', function(newValue) {
+				value = newValue;
+				render();
+			});
+		} else if (attrs.value !== undefined) {
+			value = attrs.value;
 		} else {
 			value = element.text();
 		}
 
 		scope.$watchCollection(function() {
 			return ngModel.$viewValue;
-		}, function(value) {
-			attrs.$set('checked', value && angular.isArray(value) && value.indexOf(value) >= 0);
-		});
+		}, render);
+
+		function render() {
+			var modelValue = ngModel.$viewValue;
+			attrs.$set('checked', modelValue && angular.isArray(modelValue) && modelValue.indexOf(value) >= 0);
+		}
 
 		element.on('click', clickListener);
 
