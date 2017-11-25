@@ -40,9 +40,10 @@
 			if (attrs.disabled === undefined || attrs.disabled === false) {
 				if (ngModel) {
 					if (attrs.checked) {
-						if (attrs.required === undefined || attrs.required === false) {
-							ngModel.$setViewValue(undefined, e);
+						if (ngModel.$$attr.required === true) {
+							return;
 						}
+						ngModel.$setViewValue(undefined, e);
 					} else {
 						ngModel.$setViewValue(value, e);
 					}

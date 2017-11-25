@@ -78,11 +78,11 @@
 	</p>
 	<p ng-model="ctrl.radioValue">
 		可以取消：
-		<radio ng-repeat="item in ctrl.options" value="item">选项{{item}}</radio>
+		<radio ng-repeat="item in ctrl.options" ng-value="item">选项{{item}}</radio>
 	</p>
-	<p ng-model="ctrl.radioValue">
+	<p ng-model="ctrl.radioValue" required>
 		不可取消：
-		<radio ng-repeat="item in ctrl.options" value="item" required>选项{{item}}</radio>
+		<radio ng-repeat="item in ctrl.options" ng-value="item">选项{{item}}</radio>
 	</p>
 	<p>条状单选：
 		<radio-group ng-model="ctrl.group">
