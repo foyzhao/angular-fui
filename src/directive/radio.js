@@ -17,8 +17,13 @@
 		var value;
 
 		if (ngModel) {
-			if (attrs.value !== undefined) {
-				value = scope.$eval(attrs.value);
+			if (attrs.ngValue !== undefined) {
+				attrs.$observe('value', function(newValue) {
+					value = newValue;
+					attrs.$set('checked', ngModel.$viewValue === newValue);
+				});
+			} else if (attrs.value !== undefined) {
+				value = attrs.value;
 			} else {
 				value = element.text();
 			}
