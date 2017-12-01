@@ -427,3 +427,16 @@ prompt {
 		overflow: auto;
 	}
 }
+.grid {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	&.spacing {
+		justify-content: space-between;
+	}
+	&.center {
+		justify-content: center;
+		align-content: center;
+		align-items: center;
+	}
+}

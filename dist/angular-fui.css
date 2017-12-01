@@ -508,3 +508,16 @@ prompt.spin {
   flex-grow: 1;
   overflow: auto;
 }
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.grid.spacing {
+  justify-content: space-between;
+}
+.grid.center {
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
