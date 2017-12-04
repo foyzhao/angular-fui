@@ -501,6 +501,9 @@ prompt.spin {
   justify-content: center;
   align-items: center;
 }
+.linear.center > :only-child {
+  margin: auto;
+}
 .linear > :not(.stretch) {
   flex-shrink: 0;
 }

@@ -418,6 +418,9 @@ prompt {
 	&.center {
 		justify-content: center;
 		align-items: center;
+		& > :only-child {
+			margin: auto;
+		}
 	}
 	> :not(.stretch) {
 		flex-shrink: 0;
