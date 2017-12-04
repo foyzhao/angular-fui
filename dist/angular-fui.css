@@ -63,7 +63,7 @@ input.big,
   padding: 0 .8em;
 }
 input:focus {
-  border-color: #cf2570;
+  border-color: #ff6699;
 }
 input[type=checkbox],
 input[type=radio] {
@@ -108,14 +108,14 @@ button.big,
   padding: 0 1.2em;
 }
 button.primary {
-  background-color: #cf2570;
+  background-color: #ff6699;
   color: #ffffff;
 }
 button.primary:hover {
-  background-color: #da2f7a;
+  background-color: #ff7aa7;
 }
 button.primary:active {
-  box-shadow: 0 0 4px #be2267 inset;
+  box-shadow: 0 0 4px #ff528b inset;
 }
 button.danger {
   background-color: #D00;
@@ -185,19 +185,19 @@ checkbox:before {
   height: 1em;
   line-height: 1;
   background-color: #FFF;
-  border: 1px solid #cf2570;
+  border: 1px solid #ff6699;
   border-radius: 2px;
   text-align: center;
   transition: .2s;
 }
 checkbox:hover:before {
   content: '✓';
-  color: rgba(207, 37, 112, 0.4);
+  color: rgba(255, 102, 153, 0.4);
 }
 checkbox[checked]:before {
   content: '✓';
   color: #FFF;
-  background-color: #cf2570;
+  background-color: #ff6699;
 }
 checkbox[disabled] {
   color: #b4b4b4 !important;
@@ -258,19 +258,19 @@ radio:before {
   height: 1em;
   line-height: 1;
   background-color: #FFF;
-  border: 1px solid #cf2570;
+  border: 1px solid #ff6699;
   border-radius: 1rem;
   text-align: center;
   transition: .2s;
 }
 radio:hover:before {
   content: '✓';
-  color: rgba(207, 37, 112, 0.4);
+  color: rgba(255, 102, 153, 0.4);
 }
 radio[checked]:before {
   content: '✓';
   color: #FFF;
-  background-color: #cf2570;
+  background-color: #ff6699;
 }
 radio[disabled] {
   color: #b4b4b4 !important;
@@ -311,7 +311,7 @@ radio-group > radio:not([disabled]):hover {
   background-color: #EEE;
 }
 radio-group > radio[checked] {
-  color: #cf2570;
+  color: #ff6699;
   background-color: #FFF !important;
 }
 radio-group > radio:first-child {
@@ -392,8 +392,8 @@ pagination > pagebar > button:only-child {
   border-radius: 2px;
 }
 pagination > pagebar > button.current {
-  border-color: #cf2570;
-  background: #cf2570;
+  border-color: #ff6699;
+  background: #ff6699;
   color: #ffffff;
 }
 /* dialogue */
